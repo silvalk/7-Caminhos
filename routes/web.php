@@ -17,4 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/principal', [App\Http\Controllers\Principal::class, 'principal'])->name('principal');
+Route::get('/login', [App\Http\Controllers\Principal::class, 'login'])->name('login');
+Route::get('/home', [App\Http\Controllers\Principal::class, 'home'])->name('home');
+Route::get('/categoria', [App\Http\Controllers\Principal::class, 'categoria'])->name('categoria');
+Route::get('/perfil', [App\Http\Controllers\Principal::class, 'perfil'])->name('perfil');
+
