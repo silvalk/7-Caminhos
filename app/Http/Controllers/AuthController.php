@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['senha']])) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->route('home')->with('success', 'Login realizado com sucesso!');
         }
 
         throw ValidationException::withMessages([
@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/dashboard');
+        return redirect()->route('home')->with('success', 'Conta criada com sucesso!');
     }
 
     public function logout(Request $request)
@@ -63,6 +63,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }
