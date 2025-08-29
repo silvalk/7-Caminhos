@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -13,4 +14,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/products', [HomeController::class, 'products'])->name('products');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });
+
+
+

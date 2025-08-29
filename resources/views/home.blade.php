@@ -28,7 +28,7 @@
   /* Carrossel de imagens */
   .carousel-container { width: 90%; max-width: 1000px; border-radius: 12px; overflow: hidden; margin: 30px auto; }
   .carousel-images { display: flex; transition: transform 0.5s ease-in-out; }
-  .carousel-images img { width: 100%; flex-shrink: 0; object-fit: cover; display: block; }
+  .carousel-images img { width: 100%; flex-shrink: 0; object-fit: cover; display: block; height: 400px; }
   .dots { display: flex; justify-content: center; margin: 10px 0; gap: 10px; }
   .dot { width: 15px; height: 15px; border-radius: 50%; border: 2px solid #6D0202; background: #fff; cursor: pointer; }
   .dot.active { background: #6D0202; }
@@ -37,11 +37,7 @@
   .products-section { margin: 40px auto; text-align: center; width: 90%; max-width: 1200px; }
   .products-title { font-size: 24px; font-weight: bold; color: #6D0202; margin-bottom: 20px; }
   .products-carousel-container { display: flex; justify-content: center; overflow-x: auto; }
-  .products-carousel {
-    display: flex; flex-wrap: nowrap; gap: 20px; padding: 10px;
-    scroll-behavior: smooth; scroll-snap-type: x mandatory;
-    justify-content: flex-start;
-  }
+  .products-carousel { display: flex; flex-wrap: nowrap; gap: 20px; padding: 10px; scroll-behavior: smooth; scroll-snap-type: x mandatory; justify-content: flex-start; }
   .products-carousel::-webkit-scrollbar { height: 8px; }
   .products-carousel::-webkit-scrollbar-thumb { background-color: #6D0202; border-radius: 4px; }
 
@@ -50,27 +46,37 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; padding: 15px;
   }
   .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+  .product-name { font-weight: bold; margin: 5px 0; color: #6D0202; }
+  .product-price { color: #CB9441; margin-bottom: 10px; }
   .buy-btn { background: #6D0202; color: #FFFAF3; border: none; border-radius: 20px; padding: 10px; cursor: pointer; font-size: 16px; }
 
   /* Footer */
   .footer { background: #6D0202; color: #FFFAF3; text-align: center; padding: 25px 20px; margin-top: 50px; width: 100%; min-height: 70px; }
 
-  /* Responsividade */
-  @media (max-width: 1024px) {
-    .navbar { flex-direction: column; gap: 10px; padding: 15px; }
-    .products-carousel { gap: 15px; }
-    .product-card { width: 180px; height: 280px; }
-  }
-  @media (max-width: 768px) {
-    .brand { font-size: 20px; }
-    .navbar-right img, .navbar-right button { width: 25px; height: 25px; }
-    .product-card { width: 150px; height: 250px; }
-    .carousel-container { width: 95%; }
-  }
-  @media (max-width: 480px) {
-    .product-card { width: 90%; max-width: 200px; height: 240px; }
-    .products-carousel { gap: 10px; padding: 5px; justify-content: center; }
-  }
+  /* Avaliações botão */
+  .review-button { position: fixed; bottom: 20px; right: 20px; background-color: #6D0202; color: #fff; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 28px; cursor: pointer; z-index: 1000; }
+
+  /* Modal avaliação */
+  .review-modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+  .review-modal-content { background-color: #fff; margin: 10% auto; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; position: relative; }
+  .review-modal .close { position: absolute; top: 10px; right: 20px; color: #6D0202; font-size: 28px; font-weight: bold; cursor: pointer; }
+
+  .star-rating { display: flex; justify-content: center; margin-bottom: 15px; }
+  .star { font-size: 40px; color: #ccc; cursor: pointer; transition: color 0.2s; margin: 0 5px; }
+  .star.selected, .star:hover, .star:hover ~ .star { color: #FFD700; }
+
+  textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; resize: none; font-size: 16px; }
+  .submit-review-btn { margin-top: 15px; background-color: #6D0202; color: #FFFAF3; border: none; padding: 12px 20px; font-size: 16px; cursor: pointer; border-radius: 25px; width: 100%; }
+
+  /* Carrossel de avaliações no footer */
+  .reviews-carousel { display: flex; overflow: hidden; gap: 20px; justify-content: center; }
+  .review-card { background: #fff; color: #6D0202; flex: 0 0 30%; border-radius: 12px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; }
+  .review-card p { margin-top: 10px; text-align: center; }
+  .review-stars { color: #FFD700; margin-top: 5px; }
+
+  @media (max-width: 1024px) { .navbar { flex-direction: column; gap: 10px; padding: 15px; } .products-carousel { gap: 15px; } .product-card { width: 180px; height: 280px; } }
+  @media (max-width: 768px) { .brand { font-size: 20px; } .navbar-right img, .navbar-right button { width: 25px; height: 25px; } .product-card { width: 150px; height: 250px; } .carousel-container { width: 95%; } }
+  @media (max-width: 480px) { .product-card { width: 90%; max-width: 200px; height: 240px; } .products-carousel { gap: 10px; padding: 5px; justify-content: center; } .review-card { flex: 0 0 80%; margin: 0 auto; } }
 </style>
 </head>
 <body>
@@ -118,23 +124,73 @@
   <div class="products-carousel-container">
     <div class="products-carousel">
       <div class="product-card">
-        <img src="https://source.unsplash.com/200x200/?product1" alt="Produto 1">
+        <img src="https://source.unsplash.com/220x180/?product1" alt="Produto 1">
+        <div class="product-name">Produto 1</div>
+        <div class="product-price">R$ 100,00</div>
         <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
       </div>
       <div class="product-card">
-        <img src="https://source.unsplash.com/200x200/?product2" alt="Produto 2">
+        <img src="https://source.unsplash.com/220x180/?product2" alt="Produto 2">
+        <div class="product-name">Produto 2</div>
+        <div class="product-price">R$ 120,00</div>
         <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
       </div>
       <div class="product-card">
-        <img src="https://source.unsplash.com/200x200/?product3" alt="Produto 3">
+        <img src="https://source.unsplash.com/220x180/?product3" alt="Produto 3">
+        <div class="product-name">Produto 3</div>
+        <div class="product-price">R$ 150,00</div>
         <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
       </div>
       <div class="product-card">
-        <img src="https://source.unsplash.com/200x200/?product4" alt="Produto 4">
+        <img src="https://source.unsplash.com/220x180/?product4" alt="Produto 4">
+        <div class="product-name">Produto 4</div>
+        <div class="product-price">R$ 200,00</div>
         <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Botão de avaliação -->
+<button id="review-btn" class="review-button">💬</button>
+
+<!-- Modal de avaliação -->
+<div id="review-modal" class="review-modal">
+  <div class="review-modal-content">
+    <span class="close">&times;</span>
+    <h2>Deixe sua Avaliação</h2>
+    <form id="review-form" action="{{ route('reviews.store') }}" method="POST">
+      @csrf
+      <input type="hidden" name="rating" id="rating" value="0">
+      <div class="star-rating">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <div class="form-group">
+        <label for="review-text">Comentário</label>
+        <textarea id="review-text" name="review" rows="4" placeholder="Escreva sua avaliação..." required></textarea>
+      </div>
+      <button type="submit" class="submit-review-btn">Enviar Avaliação</button>
+    </form>
+  </div>
+</div>
+
+<!-- Carrossel de avaliações -->
+<div class="reviews-carousel" id="reviews-carousel">
+  @foreach($reviews as $review)
+    <div class="review-card">
+      <strong>{{ $review->name }}</strong>
+      <div class="review-stars">
+        @for($i=1; $i<=5; $i++)
+          {!! $i <= $review->rating ? '&#9733;' : '&#9734;' !!}
+        @endfor
+      </div>
+      <p>{{ $review->review }}</p>
+    </div>
+  @endforeach
 </div>
 
 <!-- Footer -->
@@ -161,6 +217,41 @@
     currentIndex = (currentIndex + 1) % totalSlides;
     moveToSlide(currentIndex);
   }, 5000);
+
+  // Modal de avaliação
+  const modal = document.getElementById('review-modal');
+  const btn = document.getElementById('review-btn');
+  const span = document.querySelector('.review-modal .close');
+  btn.onclick = () => modal.style.display = 'block';
+  span.onclick = () => modal.style.display = 'none';
+  window.onclick = (event) => { if (event.target == modal) modal.style.display = 'none'; }
+
+  // Estrelas interativas
+  const stars = document.querySelectorAll('.star');
+  const ratingInput = document.getElementById('rating');
+  stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+      stars.forEach(s => s.style.color = s.dataset.value <= star.dataset.value ? '#FFD700' : '#ccc');
+    });
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.style.color = s.classList.contains('selected') ? '#FFD700' : '#ccc');
+    });
+    star.addEventListener('click', () => {
+      ratingInput.value = star.dataset.value;
+      stars.forEach(s => s.classList.remove('selected'));
+      stars.forEach(s => { if (s.dataset.value <= star.dataset.value) s.classList.add('selected'); });
+    });
+  });
+
+  // Carrossel de avaliações automático
+  const reviewCarousel = document.getElementById('reviews-carousel');
+  let reviewIndex = 0;
+  setInterval(() => {
+    const cardWidth = reviewCarousel.children[0].offsetWidth + 20; // gap 20px
+    reviewIndex++;
+    if(reviewIndex > reviewCarousel.children.length - 3) reviewIndex = 0;
+    reviewCarousel.style.transform = `translateX(${-reviewIndex * cardWidth}px)`;
+  }, 4000);
 </script>
 
 </body>
