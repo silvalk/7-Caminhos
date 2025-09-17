@@ -9,7 +9,6 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <style>
-/* Geral */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -17,17 +16,25 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 90px;
+    align-items: center;
 }
 
-/* Navbar */
 .header {
     background-color: #6D0202;
     color: #CB9441;
-    padding: 25px 40px;
+    padding: 20px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
+
 .logo {
     display: flex;
     align-items: center;
@@ -53,7 +60,17 @@ body {
     position: relative;
 }
 
-/* Carrossel de imagens */
+.products-redirect{
+    display: flex;
+    width: 50%;
+    max-height: 5%;
+    background-color: #e0f0f0;
+    box-shadow: rgb(0,0,0,1);
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 20px;
+}
+
 .carousel {
     width: 100%;
     max-width: 1000px;
@@ -89,7 +106,7 @@ body {
     background-color: #6D0202;
 }
 
-/* Produtos */
+
 .products {
     padding: 50px 20px;
     text-align: center;
@@ -146,16 +163,15 @@ body {
     opacity: 0.9;
 }
 
-/* Footer */
 .footer {
     background-color: #6D0202;
-    color: #fff;
-    padding: 30px 20px;
+    color: #FFFAF3;
     text-align: center;
-    font-size: 14px;
+    width: 100%;
+    min-height: 100px;
 }
 
-/* Botão de avaliações */
+
 .reviews-btn {
   position: fixed;
   bottom: 20px;
@@ -180,10 +196,9 @@ body {
 
 .reviews-btn ion-icon {
   font-size: 32px;
-  color: #fff; /* garante que o ícone fique visível */
+  color: #fff;
 }
 
-/* Modal Avaliações */
 .modal {
     display: none;
     position: fixed;
@@ -203,23 +218,23 @@ body {
     border-radius: 12px;
     max-width: 400px;
     width: 90%;
-    text-align: center; /* centraliza o texto */
+    text-align: center;
     position: relative;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza todos os elementos horizontalmente */
+    align-items: center;
 }
 
 .modal-content input[type="text"],
 .modal-content textarea {
-    width: 90%; /* ocupa quase toda a largura do modal */
+    width: 90%;
     max-width: 100%;
     margin: 10px 0;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
-    text-align: left; /* mantém o texto alinhado à esquerda dentro do campo */
+    text-align: left;
 }
 
 
@@ -261,15 +276,36 @@ textarea {
 }
 .submit-btn:hover { opacity: 0.9; }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .header { flex-direction: column; gap: 10px; }
-    .logo-text { font-size: 22px; }
-    .icons { font-size: 22px; }
-    .product-card { width: 180px; height: 280px; }
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+    .logo-text {
+        font-size: 20px;
+        line-height: 1.1;
+        text-align: center;
+    }
+    .icons {
+        gap: 15px;
+        font-size: 24px;
+        justify-content: center;
+    }
 }
-@media (max-width: 480px) {
-    .product-card { width: 90%; max-width: 200px; height: 240px; }
+
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 15px;
+    }
+    .logo-text {
+        font-size: 18px;
+    }
+    .icons {
+        gap: 12px;
+        font-size: 20px;
+    }
 }
 
 .icons ion-icon, .reviews-btn ion-icon {
@@ -286,7 +322,6 @@ textarea {
 </head>
 <body>
 
-<!-- Navbar -->
 <div class="header">
     <div class="logo">
         <div class="logo-circle"></div>
@@ -302,8 +337,11 @@ textarea {
     </div>
 </div>
 
-
-<!-- Carrossel de imagens -->
+<div class="products-redirect">
+    <div class="redirect-card">
+        <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque quidem architecto, amet officia laudantium deserunt ducimus nemo est numquam consequuntur accusamus dolorem. Distinctio ullam cumque quod ex accusantium veniam nesciunt!</h1>
+    </div>
+</div>
 <div class="carousel">
     <div class="carousel-images" id="carouselImages">
         <img src="https://picsum.photos/id/1018/1000/400" alt="Imagem 1" loading="lazy">
@@ -317,7 +355,6 @@ textarea {
     <span class="dot" onclick="moveToSlide(2)"></span>
 </div>
 
-<!-- Produtos -->
 <section class="products">
     <h2>Promoções</h2>
     <div class="product-carousel">
@@ -342,19 +379,15 @@ textarea {
     </div>
 </section>
 
-<!-- Footer -->
 <div class="footer">
     <p>© 2024 Sete Caminhos - Todos os direitos reservados.</p>
 </div>
 
-<!-- Botão de avaliações -->
 <button class="reviews-btn" id="openReviewModal">
   <ion-icon name="chatbubble-ellipses-outline" style="font-size: 32px; color: white;"></ion-icon>
 </button>
 
 
-
-<!-- Modal Avaliações -->
 <div class="modal" id="reviewModal">
   <div class="modal-content">
     <button class="close-btn" id="closeReviewModal">&times;</button>
@@ -378,7 +411,6 @@ textarea {
 
 
 <script>
-// Carrossel de imagens
 let currentIndex = 0;
 const imagesContainer = document.getElementById('carouselImages');
 const carouselDots = document.querySelectorAll('.dot');
@@ -406,14 +438,12 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.style.display = 'none';
   });
 
-  // Fechar clicando fora do modal
   window.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.style.display = 'none';
     }
   });
 
-  // Estrelas
   const stars = document.querySelectorAll('.star');
   const ratingValue = document.getElementById('ratingValue');
   const commentBox = document.getElementById('commentBox');
