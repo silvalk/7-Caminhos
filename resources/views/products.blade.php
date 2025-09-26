@@ -202,27 +202,7 @@
   </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="logo">
-    <div class="logo-circle"></div>
-    <div class="logo-text">
-      <div>Sete</div>
-      <div>Caminhos</div>
-    </div>
-  </div>
-
-  <div class="header-right">
-    <input type="text" placeholder="Procurar..." class="search-input">
-    <a href="{{ route('home') }}" class="back-home"><i class="icon ion-md-arrow-back"></i> Voltar</a>
-  </div>
-
-  <div class="icons">
-    <i class="icon ion-md-cart"></i>
-    <i class="icon ion-md-person"></i>
-    <i class="icon ion-md-menu"></i>
-  </div>
-</div>
+@include('partials.header')
 
 
   <div class="container">
@@ -276,10 +256,6 @@
     </div>
   </div>
 
-  <div class="footer">
-    © 2024 Sete Caminhos - Todos os direitos reservados.
-  </div>
-
   <div class="modal" id="productModal">
     <div class="modal-content">
       <button class="close-btn" onclick="closeModal()">&times;</button>
@@ -290,6 +266,8 @@
       <button class="add-cart-btn">Adicionar ao Carrinho</button>
     </div>
   </div>
+
+  @include('partials.footer')
 
   <script>
     const modal = document.getElementById('productModal');
