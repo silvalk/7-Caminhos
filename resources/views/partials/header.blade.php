@@ -1,10 +1,12 @@
+
 <head>
 @vite(['resources/js/header.js'])
 </head>
 <div class="header">
     <div class="logo">
     <a href="{{ route('home') }}">
-<div class="logo-circle"></div></a>
+<div class="logo-circle"><img src="{{ Vite::asset('resources/images/logo-removebg-preview.png') }}" alt="Logo">
+</div></a>
         
         <div class="logo-text">
             <div>Sete</div>

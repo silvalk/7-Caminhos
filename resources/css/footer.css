@@ -1,7 +1,96 @@
 .footer {
     background-color: #6D0202;
-    color: #FFFAF3;
+    color: #E5AA4F;
+    width: 97.9%;
+    padding: 25px 20px;
+    text-align: left;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-items: start;
+}
+
+.footer-content > div {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px 18px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     text-align: center;
-    width: 100%;
-    min-height: 100px;
+    box-sizing: border-box;
+    min-height: 200px;
+    position: relative;
+}
+
+.footer-content > div h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+h2 {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fdcc81;
+    font-weight: 400;
+}
+
+.social {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.social .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #fdcc81;
+    color: #6D0202;
+    font-size: 18px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.social .icon:hover {
+    background-color: #e6b441;
+    color: #4b0101;
+}
+
+
+@media (max-width: 768px) {
+    .footer-content {
+        max-width: 100%;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+        text-align: center;
+    }
+
+    .footer-content > div {
+        background-color: transparent;
+        padding: 12px 0;
+    }
+
+    .social {
+        justify-content: center;
+    }
 }
