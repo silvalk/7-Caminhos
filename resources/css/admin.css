@@ -1,0 +1,13 @@
+body{
+    background-color: bisque;
+    font-family: 'Marcellus', serif;
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+h1{
+    margin-left: 25vw;
+    margin-right: 25vw;
+    margin-top: 25%;
+    margin-bottom: 25%;
+}

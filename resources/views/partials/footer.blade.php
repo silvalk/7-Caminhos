@@ -31,7 +31,7 @@
       <h2>ou Entre em Contato</h2>
       <div class="social">
         <a href="https://wa.me/SEUNUMERO" target="_blank" class="icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com/SEUPERFIL" target="_blank" class="icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://instagram.com/7caminhos_artigosreligiosos" target="_blank" class="icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         <a href="https://facebook.com/SEUPERFIL" target="_blank" class="icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         <a href="https://tiktok.com/@SEUPERFIL" target="_blank" class="icon tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
       </div>

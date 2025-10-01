@@ -51,6 +51,8 @@
     </div>
 </section>
 
+
+
 <button class="reviews-btn" id="openReviewModal">
   <ion-icon name="chatbubble-ellipses-outline" style="font-size: 32px; color: white;"></ion-icon>
 </button>
@@ -131,7 +133,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-
-
 </body>
 </html>
