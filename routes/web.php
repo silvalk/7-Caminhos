@@ -22,9 +22,18 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'auth'])->name('admin.auth');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-    Route::middleware('admin')->group(function () {
+    Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('/produtos', fn() => view('admin.produtos'))->name('admin.produtos');
+
+        // Produtos CRUD
+        Route::get('/produtos', [AdminController::class, 'produtos'])->name('admin.produtos');
+        Route::get('/produtos/create', [AdminController::class, 'createProduto'])->name('admin.produtos.create');
+        Route::post('/produtos', [AdminController::class, 'storeProduto'])->name('admin.produtos.store');
+        Route::get('/produtos/{id}/edit', [AdminController::class, 'editProduto'])->name('admin.produtos.edit');
+        Route::put('/produtos/{id}', [AdminController::class, 'updateProduto'])->name('admin.produtos.update');
+        Route::delete('/produtos/{id}', [AdminController::class, 'destroyProduto'])->name('admin.produtos.destroy');
+
+        // Outras páginas do admin
         Route::get('/pedidos', fn() => view('admin.pedidos'))->name('admin.pedidos');
         Route::get('/usuarios', fn() => view('admin.usuarios'))->name('admin.usuarios');
         Route::get('/feedbacks', fn() => view('admin.feedbacks'))->name('admin.feedbacks');

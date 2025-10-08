@@ -14,7 +14,9 @@ class HomeController extends Controller
     }
 
     public function products()
-    {
-        return view('products');
-    }
+{
+    $produtos = \App\Models\Produto::all();
+    return view('products', compact('produtos'));
+}
+
 }

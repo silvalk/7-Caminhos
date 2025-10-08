@@ -3,9 +3,31 @@
 @section('titulo', 'Dashboard')
 
 @section('conteudo')
-<div class="cards">
-  <div class="card">Vendas Hoje: <b>R$ 500</b></div>
-  <div class="card">Pedidos Pendentes: <b>8</b></div>
-  <div class="card">Usuários Ativos: <b>120</b></div>
+<div class="dashboard-container">
+    <!-- Cards de estatísticas -->
+    <div class="dashboard-cards">
+        <div class="card">
+            <h3>Produtos</h3>
+            <p>{{ $produtos ?? 0 }}</p>
+        </div>
+        <div class="card">
+            <h3>Pedidos</h3>
+            <p>{{ $pedidos ?? 0 }}</p>
+        </div>
+        <div class="card">
+            <h3>Usuários</h3>
+            <p>{{ $usuarios ?? 0 }}</p>
+        </div>
+        <div class="card">
+            <h3>Feedbacks</h3>
+            <p>{{ $feedbacks ?? 0 }}</p>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h3>Pedidos nos últimos 6 meses</h3>
+        <canvas id="pedidosChart"></canvas>
+    </div>
 </div>
 @endsection
+

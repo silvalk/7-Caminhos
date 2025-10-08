@@ -4,21 +4,37 @@
 
 @section('conteudo')
 <h2>Gerenciar Produtos</h2>
+
+<a href="{{ route('admin.produtos.create') }}" class="btn">Adicionar Produto</a>
+
 <table>
   <thead>
     <tr>
-      <th>ID</th><th>Nome</th><th>Preço</th><th>Estoque</th><th>Ações</th>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Estoque</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
+    @foreach($produtos as $produto)
     <tr>
-      <td>1</td><td>Cristal Azul</td><td>R$ 12,90</td><td>20</td>
-      <td><button>Editar</button> <button>Excluir</button></td>
+      <td>{{ $produto->id }}</td>
+      <td>{{ $produto->nome }}</td>
+      <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
+      <td>{{ $produto->estoque }}</td>
+      <td>
+        <a href="{{ route('admin.produtos.edit', $produto->id) }}"><button>Editar</button></a>
+        <form action="{{ route('admin.produtos.destroy', $produto->id) }}" method="POST" style="display:inline;">
+          @csrf
+          @method('DELETE')
+          <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
+        </form>
+      </td>
     </tr>
-    <tr>
-      <td>2</td><td>Vela Branca</td><td>R$ 9,90</td><td>50</td>
-      <td><button>Editar</button> <button>Excluir</button></td>
-    </tr>
+    @endforeach
   </tbody>
 </table>
 @endsection
+
