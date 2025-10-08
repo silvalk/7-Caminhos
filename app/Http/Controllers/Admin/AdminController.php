@@ -9,6 +9,8 @@ use App\Models\Produto;
 use App\Models\Pedido;
 use App\Models\Feedback;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -112,10 +114,17 @@ class AdminController extends Controller
     }
 
     public function destroyProduto($id)
-    {
-        $produto = Produto::findOrFail($id);
-        $produto->delete();
+{
+    $produto = Produto::findOrFail($id);
 
-        return redirect()->route('admin.produtos')->with('success', 'Produto excluído com sucesso!');
+    if ($produto->imagem && Storage::disk('public')->exists($produto->imagem)) {
+        Storage::disk('public')->delete($produto->imagem);
     }
+
+    $produto->delete();
+
+    return redirect()->route('admin.produtos')->with('success', 'Produto excluído com sucesso!');
 }
+
+}
+
