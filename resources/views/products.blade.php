@@ -106,10 +106,9 @@
     <p id="modalPrice"></p>
     <p id="modalDesc"></p>
     <button class="add-cart-btn" id="addToCartBtn">Adicionar ao Carrinho</button>
-
   </div>
 </div>
-
+<div id="customAlert" class="custom-alert"></div>
 @include('partials.footer')
 
 <script>
@@ -175,9 +174,17 @@
         descricao: currentProduct.descricao
       });
     }
+    function showCustomAlert(message) {
+      const alertBox = document.getElementById('customAlert');
+      alertBox.textContent = message;
+      alertBox.classList.add('show');
+      setTimeout(() => {
+      alertBox.classList.remove('show');
+     }, 3000);
+  }
 
     saveCart(cart);
-    alert(`"${currentProduct.nome}" adicionado ao carrinho!`);
+    showCustomAlert(`"${currentProduct.nome}" adicionado ao carrinho!`);
     closeModal();
     updateCartIcon();
   });
@@ -201,6 +208,8 @@
   }
 
   updateCartIcon();
+  
+  
 </script>
 
 </body>

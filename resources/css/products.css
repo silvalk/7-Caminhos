@@ -161,3 +161,34 @@ body {
     cursor: pointer;
     margin-top: 10px;
   }
+
+  #customAlert {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 0 0 8px 8px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 9999;
+    max-width: 90%;
+    text-align: center;
+  
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+  }
+  
+  #customAlert.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+  
+  
+  
