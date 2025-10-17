@@ -5,6 +5,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\CartController;
+
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/order', [CartController::class, 'placeOrder'])->name('cart.order');
+Route::view('/cart', 'cart')->name('cart');
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products'])->name('products');
@@ -25,7 +31,6 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-        // Produtos CRUD
         Route::get('/produtos', [AdminController::class, 'produtos'])->name('admin.produtos');
         Route::get('/produtos/create', [AdminController::class, 'createProduto'])->name('admin.produtos.create');
         Route::post('/produtos', [AdminController::class, 'storeProduto'])->name('admin.produtos.store');
@@ -33,7 +38,6 @@ Route::prefix('admin')->group(function () {
         Route::put('/produtos/{id}', [AdminController::class, 'updateProduto'])->name('admin.produtos.update');
         Route::delete('/produtos/{id}', [AdminController::class, 'destroyProduto'])->name('admin.produtos.destroy');
 
-        // Outras páginas do admin
         Route::get('/pedidos', fn() => view('admin.pedidos'))->name('admin.pedidos');
         Route::get('/usuarios', fn() => view('admin.usuarios'))->name('admin.usuarios');
         Route::get('/feedbacks', fn() => view('admin.feedbacks'))->name('admin.feedbacks');

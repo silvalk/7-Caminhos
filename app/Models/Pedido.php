@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'user_id',
-        'total',
-        'status'
+        'produtos', 'subtotal', 'frete', 'total', 'cep',
     ];
 
-    public function user()
+    protected $casts = [
+        'produtos' => 'array',
+    ];
+
+public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
     }
 }
+
+    

@@ -105,7 +105,8 @@
     <h2 id="modalTitle"></h2>
     <p id="modalPrice"></p>
     <p id="modalDesc"></p>
-    <button class="add-cart-btn">Adicionar ao Carrinho</button>
+    <button class="add-cart-btn" id="addToCartBtn">Adicionar ao Carrinho</button>
+
   </div>
 </div>
 
@@ -117,13 +118,26 @@
   const modalTitle = document.getElementById('modalTitle');
   const modalPrice = document.getElementById('modalPrice');
   const modalDesc = document.getElementById('modalDesc');
+  const addToCartBtn = document.getElementById('addToCartBtn');
 
-  function openModal(title, price, img, desc) {
+  let currentProduct = {
+    nome: '',
+    preco: 0,
+    imagem: '',
+    descricao: ''
+  };
+
+  function openModal(title, priceStr, img, desc) {
     modalImg.src = img;
     modalTitle.textContent = title;
-    modalPrice.textContent = price;
+    modalPrice.textContent = priceStr;
     modalDesc.textContent = desc;
     modal.style.display = 'flex';
+
+    currentProduct.nome = title;
+    currentProduct.preco = parseFloat(priceStr.replace('R$ ', '').replace('.', '').replace(',', '.'));
+    currentProduct.imagem = img;
+    currentProduct.descricao = desc;
   }
 
   function closeModal() {
@@ -135,6 +149,59 @@
       closeModal();
     }
   };
+
+  function getCart() {
+    const cartStr = localStorage.getItem('cart');
+    return cartStr ? JSON.parse(cartStr) : [];
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  addToCartBtn.addEventListener('click', () => {
+    let cart = getCart();
+
+    const index = cart.findIndex(p => p.nome === currentProduct.nome);
+    if (index >= 0) {
+      cart[index].quantidade += 1;
+    } else {
+      cart.push({
+        nome: currentProduct.nome,
+        preco: currentProduct.preco,
+        quantidade: 1,
+        cor: '',
+        imagem: currentProduct.imagem,
+        descricao: currentProduct.descricao
+      });
+    }
+
+    saveCart(cart);
+    alert(`"${currentProduct.nome}" adicionado ao carrinho!`);
+    closeModal();
+    updateCartIcon();
+  });
+
+  function updateCartIcon() {
+    const cart = getCart();
+    const totalItems = cart.reduce((acc, p) => acc + p.quantidade, 0);
+    const cartIcon = document.querySelector('.cart-icon span[data-count]');
+
+    if (cartIcon) {
+      cartIcon.textContent = totalItems;
+      cartIcon.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    }
+  }
+
+  const cartIcon = document.querySelector('.cart-icon');
+  if (cartIcon) {
+    cartIcon.addEventListener('click', () => {
+      window.location.href = '/cart';
+    });
+  }
+
+  updateCartIcon();
 </script>
+
 </body>
 </html>
