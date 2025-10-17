@@ -65,6 +65,7 @@ class AdminController extends Controller
             'estoque' => 'required|integer',
             'descricao' => 'nullable|string',
             'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'categoria' => 'required|string|in:Cristais,Ervas,Miçangas,Velas,Kits,Imagens',
         ]);
 
         $produto = new Produto();
@@ -72,6 +73,7 @@ class AdminController extends Controller
         $produto->preco = $request->preco;
         $produto->estoque = $request->estoque;
         $produto->descricao = $request->descricao;
+        $produto->categoria = $request->categoria;
 
         if ($request->hasFile('imagem')) {
             $produto->imagem = $request->file('imagem')->store('produtos', 'public');

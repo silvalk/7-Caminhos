@@ -27,6 +27,50 @@
     <span class="dot" onclick="moveToSlide(2)"></span>
 </div>
 
+<section class="carrossel-categorias">
+  <h2 class="titulo-carrossel">Escolha por categoria</h2>
+  <div class="lista-categorias">
+    <a href="/products?categorias[]=Cristais" class="categoria-item">
+      <div class="categoria-imagem">
+        <img src="imagem-exemplo.jpg" alt="Cristais">
+      </div>
+      <p>Cristais</p>
+    </a>
+    <a href="/products?categorias[]=Ervas" class="categoria-item">
+      <div class="categoria-imagem">
+        <img src="imagem-exemplo.jpg" alt="Ervas">
+      </div>
+      <p>Ervas</p>
+    </a>
+    <a href="/products?categorias[]=Miçangas" class="categoria-item">
+      <div class="categoria-imagem">
+        <img src="imagem-exemplo.jpg" alt="Miçangas">
+      </div>
+      <p>Miçangas</p>
+    </a>
+    <a href="/products?categorias[]=Velas" class="categoria-item">
+      <div class="categoria-imagem">
+        <img src="imagem-exemplo.jpg" alt="Velas">
+      </div>
+      <p>Velas</p>
+    </a>
+    <a href="/products?categorias[]=Kits" class="categoria-item">
+      <div class="categoria-imagem">
+        <img src="imagem-exemplo.jpg" alt="Kits">
+      </div>
+      <p>Kits</p>
+    </a>
+    <a href="/products?categorias[]=Imagens" class="categoria-item">
+      <div class="categoria-imagem">
+        <img src="imagem-exemplo.jpg" alt="Imagens">
+      </div>
+      <p>Imagens</p>
+    </a>
+  </div>
+</section>
+
+
+
 <section class="products">
     <h2>Promoções</h2>
     <div class="product-carousel">
@@ -131,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
 
 </script>
 </body>

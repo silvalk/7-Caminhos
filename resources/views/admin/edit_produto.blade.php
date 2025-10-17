@@ -36,6 +36,17 @@
         <img src="{{ asset('storage/'.$produto->imagem) }}" alt="{{ $produto->nome }}" width="100"><br>
     @endif
     <input type="file" name="imagem"><br><br>
+    <label for="categoria">Categoria:</label>
+<select name="categoria" id="categoria" required>
+  <option value="">Selecione</option>
+  <option value="Cristais" {{ old('categoria', $produto->categoria ?? '') == 'Cristais' ? 'selected' : '' }}>Cristais</option>
+  <option value="Ervas" {{ old('categoria', $produto->categoria ?? '') == 'Ervas' ? 'selected' : '' }}>Ervas</option>
+  <option value="Miçangas" {{ old('categoria', $produto->categoria ?? '') == 'Miçangas' ? 'selected' : '' }}>Miçangas</option>
+  <option value="Velas" {{ old('categoria', $produto->categoria ?? '') == 'Velas' ? 'selected' : '' }}>Velas</option>
+  <option value="Kits" {{ old('categoria', $produto->categoria ?? '') == 'Kits' ? 'selected' : '' }}>Kits</option>
+  <option value="Imagens" {{ old('categoria', $produto->categoria ?? '') == 'Imagens' ? 'selected' : '' }}>Imagens</option>
+</select>
+
 
     <button type="submit">Atualizar Produto</button>
 </form>
