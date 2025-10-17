@@ -108,7 +108,6 @@
     <h2>Deixe sua Avaliação</h2>
     <form id="reviewForm" method="POST" action="{{ route('reviews.store') }}">
       @csrf
-      <input type="text" name="name" placeholder="Seu nome" required>
       <div class="stars" id="starRating">
         <span class="star" data-value="1">&#9733;</span>
         <span class="star" data-value="2">&#9733;</span>

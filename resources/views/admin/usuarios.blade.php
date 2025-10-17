@@ -4,6 +4,11 @@
 
 @section('conteudo')
 <p>Clientes cadastrados no sistema.</p>
+
+@if(session('success'))
+    <div style="color:green;">{{ session('success') }}</div>
+@endif
+
 <table>
   <thead>
     <tr>
@@ -11,10 +16,27 @@
     </tr>
   </thead>
   <tbody>
+    @forelse ($usuarios as $usuario)
     <tr>
-      <td>1</td><td>Maria Silva</td><td>maria@email.com</td>
-      <td><button>Banir</button></td>
+      <td>{{ $usuario->id }}</td>
+      <td>{{ $usuario->name }}</td>
+      <td>{{ $usuario->email }}</td>
+      <td>
+        <form action="{{ route('admin.usuarios.excluir', $usuario->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+          @csrf
+          @method('DELETE')
+          <button type="submit">Excluir</button>
+        </form>
+
+
+      </td>
     </tr>
+    @empty
+    <tr>
+      <td colspan="4">Nenhum usuário encontrado.</td>
+    </tr>
+    @endforelse
   </tbody>
 </table>
 @endsection
+

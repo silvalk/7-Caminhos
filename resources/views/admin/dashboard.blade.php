@@ -4,7 +4,6 @@
 
 @section('conteudo')
 <div class="dashboard-container">
-    <!-- Cards de estatísticas -->
     <div class="dashboard-cards">
         <div class="card">
             <h3>Produtos</h3>

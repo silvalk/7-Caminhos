@@ -30,13 +30,14 @@
         <input type="email" id="email" name="email" placeholder="Digite seu email" required>
       </div>
       <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
       </div>
-      <div class="form-group">
-        <label for="senha_confirmation">Confirmar Senha</label>
-        <input type="password" id="senha_confirmation" name="senha_confirmation" placeholder="Digite novamente a senha" required>
+        <div class="form-group">
+        <label for="password_confirmation">Confirmar Senha</label>
+        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Digite novamente a senha" required>
       </div>
+
       <div class="btn-primary">
         <button type="submit">Registrar</button>
       </div>

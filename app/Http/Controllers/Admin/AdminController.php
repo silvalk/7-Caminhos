@@ -11,9 +11,25 @@ use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
-
 class AdminController extends Controller
 {
+
+    public function usuarios()
+{
+    $usuarios = User::all();
+    return view('admin.usuarios', compact('usuarios')); 
+}
+
+
+public function excluirUsuario($id)
+{
+    $usuario = User::findOrFail($id);
+    $usuario->delete();
+
+    return redirect()->route('admin.usuarios')->with('success', 'Usuário excluído com sucesso!');
+}
+
+
     public function login()
     {
         return view('admin.login_admin');
@@ -126,6 +142,33 @@ class AdminController extends Controller
     $produto->delete();
 
     return redirect()->route('admin.produtos')->with('success', 'Produto excluído com sucesso!');
+}
+
+    public function pedidos()
+{
+    $pedidos = Pedido::with('user')->latest()->get();
+
+    return view('admin.pedidos', compact('pedidos'));
+}
+
+    public function showPedido($id)
+{
+    $pedido = Pedido::with('user')->findOrFail($id);
+    return view('admin.show_pedido', compact('pedido'));
+}
+
+public function feedbacks()
+{
+    $feedbacks = Feedback::with('user')->get();
+    return view('admin.feedbacks', compact('feedbacks'));
+}
+
+public function destroyFeedback($id)
+{
+    $feedback = Feedback::findOrFail($id);
+    $feedback->delete();
+
+    return redirect()->route('admin.feedbacks')->with('success', 'Feedback excluído com sucesso.');
 }
 
 }

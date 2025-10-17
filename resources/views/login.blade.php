@@ -30,8 +30,8 @@
         <input type="email" id="email" name="email" placeholder="Digite seu email" required>
       </div>
       <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
       </div>
       <div class="forgot-password">
         <a href="#">Esqueci a senha</a>

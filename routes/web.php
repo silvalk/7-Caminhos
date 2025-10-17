@@ -21,7 +21,8 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
@@ -29,8 +30,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
+        Route::delete('/usuarios/{id}', [AdminController::class, 'excluirUsuario'])->name('admin.usuarios.excluir');
 
+
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/produtos', [AdminController::class, 'produtos'])->name('admin.produtos');
         Route::get('/produtos/create', [AdminController::class, 'createProduto'])->name('admin.produtos.create');
         Route::post('/produtos', [AdminController::class, 'storeProduto'])->name('admin.produtos.store');
@@ -38,9 +42,11 @@ Route::prefix('admin')->group(function () {
         Route::put('/produtos/{id}', [AdminController::class, 'updateProduto'])->name('admin.produtos.update');
         Route::delete('/produtos/{id}', [AdminController::class, 'destroyProduto'])->name('admin.produtos.destroy');
 
-        Route::get('/pedidos', fn() => view('admin.pedidos'))->name('admin.pedidos');
-        Route::get('/usuarios', fn() => view('admin.usuarios'))->name('admin.usuarios');
-        Route::get('/feedbacks', fn() => view('admin.feedbacks'))->name('admin.feedbacks');
+        Route::get('/pedidos', [AdminController::class, 'pedidos'])->name('admin.pedidos');
+        Route::get('/pedidos/{id}', [AdminController::class, 'showPedido'])->name('admin.pedidos.show');
+
+        Route::get('/feedbacks', [AdminController::class, 'feedbacks'])->name('admin.feedbacks');
+        Route::delete('/feedbacks/{id}', [AdminController::class, 'destroyFeedback'])->name('admin.feedbacks.destroy');
         Route::get('/relatorios', fn() => view('admin.relatorios'))->name('admin.relatorios');
     });
 });

@@ -17,12 +17,13 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'senha' => ['required'],
+            'password' => ['required'], 
         ]);
 
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['senha']])) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('home')->with('success', 'Login realizado com sucesso!');
         }
@@ -41,14 +42,14 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => ['required', 'email', 'unique:users,email'],
-            'senha' => ['required', 'min:6', 'confirmed'],
+            'password' => ['required', 'min:6', 'confirmed'], // novamente use password, não senha
         ], [
-            'senha.confirmed' => 'A confirmação de senha não corresponde.',
+            'password.confirmed' => 'A confirmação de senha não corresponde.',
         ]);
 
         $user = User::create([
             'email' => $request->email,
-            'password' => Hash::make($request->senha),
+            'password' => Hash::make($request->password),
         ]);
 
         Auth::login($user);

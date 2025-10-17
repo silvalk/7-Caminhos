@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use Illuminate\Http\Request;
-use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
@@ -12,22 +12,21 @@ class ReviewController extends Controller
 {
     $request->validate([
         'rating' => 'required|integer|min:1|max:5',
-        'review' => 'required|string|max:500',
+        'comment' => 'required|string',
     ]);
 
-    $existing = Review::where('user_id', Auth::id())->first();
-    if ($existing) {
-        return back()->with('error', 'Você já enviou uma avaliação.');
+    if (!auth()->check()) {
+        return redirect()->back()->withErrors('Você precisa estar logado para enviar feedback.');
     }
 
-    Review::create([
-        'user_id' => Auth::id(),
-        'name' => Auth::user()->email,
+    Feedback::create([
+        'user_id' => auth()->id(),
+        'name' => auth()->user()->name,
         'rating' => $request->rating,
-        'review' => $request->review,
+        'comment' => $request->comment,
     ]);
 
-    return redirect()->back()->with('success', 'Avaliação enviada com sucesso!');
+    return redirect()->back()->with('success', 'Feedback enviado com sucesso!');
 }
 
 }
