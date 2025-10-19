@@ -42,21 +42,21 @@ class HomeController extends Controller
 
     $produtos = $query->paginate(10)->withQueryString();
 
-    // Agora também pegamos o preço promocional
     $produtosArray = $produtos->map(function ($produto) {
-        return [
-            'id' => $produto->id,
-            'nome' => $produto->nome,
-            'preco' => $produto->preco,
-            'preco_promocional' => $produto->promocao ? $produto->promocao->preco_promocional : null, 
-            'descricao' => $produto->descricao,
-            'imagem' => $produto->imagem ? '/storage/'.$produto->imagem : '/storage/default.jpg',
-        ];
-    })->values()->toArray();
+        $promocao = $produto->promocao;
+            return [
+                'id' => $produto->id,
+                'nome' => $produto->nome,
+                'preco' => $produto->preco,
+                'preco_promocional' => $promocao ? $promocao->preco_promocional : null,
+                'descricao' => $produto->descricao,
+                'imagem' => $produto->imagem ? '/storage/'.$produto->imagem : '/storage/default.jpg',
+            ];
+        })->values()->toArray();
+
 
     return view('products', compact('produtos', 'produtosArray', 'selectedProductId'));
 }
-
 
 
 

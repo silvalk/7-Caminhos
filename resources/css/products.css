@@ -205,6 +205,16 @@ body {
   transition-delay: 0s;
 } 
 
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 8px;
+}
+
+.promo-price {
+  color: red;
+  font-weight: bold;
+}
 
 
 @media (max-width: 1024px) {

@@ -17,31 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
   modalImg.src = produto.imagem;
   modalImg.alt = produto.nome;
   modalTitle.textContent = produto.nome;
-  modalDesc.textContent = produto.descricao || '';
 
-  // Checa se produto tem preco_promocional e se é menor que o preco original
-  if (produto.preco_promocional && produto.preco_promocional < produto.preco) {
-    modalPrice.innerHTML = `
-      <span style="text-decoration: line-through; color: gray;">
-        R$ ${Number(produto.preco).toFixed(2).replace('.', ',')}
-      </span>
-      <span style="color: red; font-weight: bold; margin-left: 8px;">
-        R$ ${Number(produto.preco_promocional).toFixed(2).replace('.', ',')}
-      </span>
-    `;
+  if (produto.preco_promocional) {
+    modalPrice.innerHTML = `<span class="old-price">R$ ${Number(produto.preco).toFixed(2).replace('.', ',')}</span> <span class="promo-price">R$ ${Number(produto.preco_promocional).toFixed(2).replace('.', ',')}</span>`;
   } else {
     modalPrice.textContent = 'R$ ' + Number(produto.preco).toFixed(2).replace('.', ',');
   }
 
+  modalDesc.textContent = produto.descricao || '';
   modal.style.display = 'flex';
 
   currentProduct = {
     ...produto,
-    preco: parseFloat(produto.preco_promocional && produto.preco_promocional < produto.preco ? produto.preco_promocional : produto.preco),
+    preco: produto.preco_promocional ? parseFloat(produto.preco_promocional) : parseFloat(produto.preco),
     quantidade: 1,
     cor: '',
   };
 }
+
 
 
   function closeModal() {
