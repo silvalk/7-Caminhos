@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  @vite(['resources/js/products.js'])
+
 </head>
 <body>
 @include('partials.header')
@@ -77,11 +77,12 @@
         $nome = addslashes($produto->nome);
         $descricao = addslashes($produto->descricao ?? '');
     @endphp
-    <div class="product-card" onclick="openModal('{{ $nome }}', '{{ $preco }}', '{{ $imagem }}', '{{ $descricao }}')">
-      <img src="{{ $imagem }}" alt="{{ $produto->nome }}">
-      <h4>{{ $produto->nome }}</h4>
-      <p>{{ $preco }}</p>
-    </div>
+    <div class="product-card" data-id="{{ $produto->id }}">
+  <img src="{{ $imagem }}" alt="{{ $produto->nome }}">
+  <h4>{{ $produto->nome }}</h4>
+  <p>{{ $preco }}</p>
+</div>
+
   @endforeach
 </div>
 
@@ -100,7 +101,7 @@
 
 <div class="modal" id="productModal">
   <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">&times;</button>
+    <button class="close-btn">&times;</button>
     <img id="modalImg" src="" alt="Produto">
     <h2 id="modalTitle"></h2>
     <p id="modalPrice"></p>
@@ -111,106 +112,12 @@
 <div id="customAlert" class="custom-alert"></div>
 @include('partials.footer')
 
+
 <script>
-  const modal = document.getElementById('productModal');
-  const modalImg = document.getElementById('modalImg');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalPrice = document.getElementById('modalPrice');
-  const modalDesc = document.getElementById('modalDesc');
-  const addToCartBtn = document.getElementById('addToCartBtn');
-
-  let currentProduct = {
-    nome: '',
-    preco: 0,
-    imagem: '',
-    descricao: ''
-  };
-
-  function openModal(title, priceStr, img, desc) {
-    modalImg.src = img;
-    modalTitle.textContent = title;
-    modalPrice.textContent = priceStr;
-    modalDesc.textContent = desc;
-    modal.style.display = 'flex';
-
-    currentProduct.nome = title;
-    currentProduct.preco = parseFloat(priceStr.replace('R$ ', '').replace('.', '').replace(',', '.'));
-    currentProduct.imagem = img;
-    currentProduct.descricao = desc;
-  }
-
-  function closeModal() {
-    modal.style.display = 'none';
-  }
-
-  window.onclick = function(event) {
-    if (event.target === modal) {
-      closeModal();
-    }
-  };
-
-  function getCart() {
-    const cartStr = localStorage.getItem('cart');
-    return cartStr ? JSON.parse(cartStr) : [];
-  }
-
-  function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }
-
-  addToCartBtn.addEventListener('click', () => {
-    let cart = getCart();
-
-    const index = cart.findIndex(p => p.nome === currentProduct.nome);
-    if (index >= 0) {
-      cart[index].quantidade += 1;
-    } else {
-      cart.push({
-        nome: currentProduct.nome,
-        preco: currentProduct.preco,
-        quantidade: 1,
-        cor: '',
-        imagem: currentProduct.imagem,
-        descricao: currentProduct.descricao
-      });
-    }
-    function showCustomAlert(message) {
-      const alertBox = document.getElementById('customAlert');
-      alertBox.textContent = message;
-      alertBox.classList.add('show');
-      setTimeout(() => {
-      alertBox.classList.remove('show');
-     }, 3000);
-  }
-
-    saveCart(cart);
-    showCustomAlert(`"${currentProduct.nome}" adicionado ao carrinho!`);
-    closeModal();
-    updateCartIcon();
-  });
-
-  function updateCartIcon() {
-    const cart = getCart();
-    const totalItems = cart.reduce((acc, p) => acc + p.quantidade, 0);
-    const cartIcon = document.querySelector('.cart-icon span[data-count]');
-
-    if (cartIcon) {
-      cartIcon.textContent = totalItems;
-      cartIcon.style.display = totalItems > 0 ? 'inline-block' : 'none';
-    }
-  }
-
-  const cartIcon = document.querySelector('.cart-icon');
-  if (cartIcon) {
-    cartIcon.addEventListener('click', () => {
-      window.location.href = '/cart';
-    });
-  }
-
-  updateCartIcon();
-  
-  
+  window.produtos = @json($produtosArray);
+  window.selectedProductId = @json(request('selected'));
 </script>
 
+@vite(['resources/js/products.js'])
 </body>
 </html>

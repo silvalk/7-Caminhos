@@ -17,4 +17,9 @@ class Produto extends Model
         'imagem', 
         'categoria'];
 
+public function promocao()
+{
+    return $this->hasOne(Promocao::class, 'produto_id');
+}
+
 }

@@ -18,28 +18,46 @@ class HomeController extends Controller
     }
 
     public function products(Request $request)
-    {
-        $categorias = $request->input('categorias', []);
-        $preco = $request->input('preco');
+{
+    $selectedProductId = $request->input('selected', null);
 
-        $query = \App\Models\Produto::query();
+    $categorias = $request->input('categorias', []);
+    $preco = $request->input('preco');
 
-        if (!empty($categorias)) {
-            $query->whereIn('categoria', $categorias);
-        }
+    $query = \App\Models\Produto::with('promocao');  // carregando promoções junto
 
-        if ($preco) {
-            if ($preco === 'ate100') {
-                $query->where('preco', '<=', 100);
-            } elseif ($preco === '100a200') {
-                $query->whereBetween('preco', [100, 200]);
-            } elseif ($preco === 'acima200') {
-                $query->where('preco', '>', 200);
-            }
-        }
-
-        $produtos = $query->paginate(10)->withQueryString();
-
-        return view('products', compact('produtos'));
+    if (!empty($categorias)) {
+        $query->whereIn('categoria', $categorias);
     }
+
+    if ($preco) {
+        if ($preco === 'ate100') {
+            $query->where('preco', '<=', 100);
+        } elseif ($preco === '100a200') {
+            $query->whereBetween('preco', [100, 200]);
+        } elseif ($preco === 'acima200') {
+            $query->where('preco', '>', 200);
+        }
+    }
+
+    $produtos = $query->paginate(10)->withQueryString();
+
+    // Agora também pegamos o preço promocional
+    $produtosArray = $produtos->map(function ($produto) {
+        return [
+            'id' => $produto->id,
+            'nome' => $produto->nome,
+            'preco' => $produto->preco,
+            'preco_promocional' => $produto->promocao ? $produto->promocao->preco_promocional : null, 
+            'descricao' => $produto->descricao,
+            'imagem' => $produto->imagem ? '/storage/'.$produto->imagem : '/storage/default.jpg',
+        ];
+    })->values()->toArray();
+
+    return view('products', compact('produtos', 'produtosArray', 'selectedProductId'));
+}
+
+
+
+
 }
