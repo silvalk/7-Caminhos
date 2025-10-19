@@ -10,6 +10,14 @@
     <p><strong>Frete:</strong> R$ {{ number_format($pedido->frete, 2, ',', '.') }}</p>
     <p><strong>Total:</strong> R$ {{ number_format($pedido->total, 2, ',', '.') }}</p>
 
+    <p><strong>Status:</strong> 
+        @if($pedido->status === 'pendente')
+            <span style="color: orange; font-weight: bold;">Pendente</span>
+        @else
+            <span style="color: green; font-weight: bold;">Concluído</span>
+        @endif
+    </p>
+
     <h3>Produtos:</h3>
     <ul>
         @foreach ($pedido->produtos as $produto)
@@ -21,5 +29,15 @@
         @endforeach
     </ul>
 
-    <a href="{{ route('admin.pedidos') }}">Voltar</a>
+    <p><strong>Status:</strong> {{ ucfirst($pedido->status) }}</p>
+
+@if($pedido->status === 'pendente')
+    <form method="POST" action="{{ route('admin.pedidos.concluir', $pedido->id) }}">
+        @csrf
+        <button type="submit" class="btn btn-success">Concluir Pedido</button>
+    </form>
+@endif
+
+
+    <a href="{{ route('admin.pedidos') }}" style="display: inline-block; margin-top: 20px;">Voltar</a>
 @endsection

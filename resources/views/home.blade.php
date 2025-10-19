@@ -72,28 +72,35 @@
 
 
 <section class="products">
-    <h2>Promoções</h2>
+    <h2>Destaques</h2>
     <div class="product-carousel">
-        <div class="product-card">
-            <img src="https://picsum.photos/id/1040/200/150" alt="Produto 1" loading="lazy">
-            <h3>Produto 1</h3>
-            <p>R$ 100,00</p>
-            <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
-        </div>
-        <div class="product-card">
-            <img src="https://picsum.photos/id/1041/200/150" alt="Produto 2" loading="lazy">
-            <h3>Produto 2</h3>
-            <p>R$ 150,00</p>
-            <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
-        </div>
-        <div class="product-card">
-            <img src="https://picsum.photos/id/1042/200/150" alt="Produto 3" loading="lazy">
-            <h3>Produto 3</h3>
-            <p>R$ 200,00</p>
-            <button class="buy-btn" onclick="window.location.href='{{ route('products') }}'">Comprar</button>
-        </div>
+        @forelse ($promocoes as $promocao)
+            @php
+                $produto = $promocao->produto;
+            @endphp
+            <div class="product-card">
+                <img src="{{ $produto->imagem ? asset('storage/' . $produto->imagem) : 'https://picsum.photos/200/150' }}" alt="{{ $produto->nome }}">
+
+                <h3>{{ $produto->nome }}</h3>
+                <p>
+                    <span style="text-decoration: line-through; color: #999;">
+                        R$ {{ number_format($produto->preco, 2, ',', '.') }}
+                    </span>
+                    &nbsp;
+                    <span style="color: #e74c3c; font-weight: bold;">
+                        R$ {{ number_format($promocao->preco_promocional, 2, ',', '.') }}
+                    </span>
+                </p>
+                <button class="buy-btn" onclick="window.location.href='{{ route('products', ['selected' => $produto->id]) }}'">
+                    Comprar
+                </button>
+            </div>
+        @empty
+            <p>Nenhum produto em promoção no momento.</p>
+        @endforelse
     </div>
 </section>
+
 
 
 

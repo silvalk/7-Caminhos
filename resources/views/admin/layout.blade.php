@@ -25,5 +25,7 @@
       <section>@yield('conteudo')</section>
     </main>
   </div>
+    @yield('scripts')
+
 </body>
 </html>

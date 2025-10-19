@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Produto;
 use App\Models\Pedido;
+use App\Models\Promocao;
 use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+
 
 class AdminController extends Controller
 {
@@ -48,14 +53,39 @@ public function excluirUsuario($id)
     }
 
     public function dashboard()
-    {
-        $produtos = Produto::count();
-        $pedidos = Pedido::count();
-        $usuarios = User::count();
-        $feedbacks = Feedback::count();
+{
+    $usuariosCount = User::count();
+    $produtosCount = Produto::count();
+    $feedbacksCount = Feedback::count();
 
-        return view('admin.dashboard', compact('produtos', 'pedidos', 'usuarios', 'feedbacks'));
+    $pedidosPendentesCount = Pedido::where('status', 'pendente')->count();
+    $pedidosCount = Pedido::count();
+
+    $pedidosUltimos30DiasRaw = Pedido::selectRaw('DATE(created_at) as dia, COUNT(*) as total')
+        ->where('created_at', '>=', now()->subDays(29)->startOfDay())
+        ->groupBy('dia')
+        ->orderBy('dia')
+        ->get();
+
+    $pedidosUltimos30Dias = [];
+    for ($i = 0; $i < 30; $i++) {
+        $date = now()->subDays(29 - $i);
+        $key = $date->format('d/m');
+
+        $registro = $pedidosUltimos30DiasRaw->firstWhere('dia', $date->toDateString());
+        $pedidosUltimos30Dias[$key] = $registro ? $registro->total : 0;
     }
+
+    return view('admin.dashboard', compact(
+        'usuariosCount',
+        'produtosCount',
+        'feedbacksCount',
+        'pedidosPendentesCount',
+        'pedidosCount',
+        'pedidosUltimos30Dias'
+    ));
+}
+
 
     public function logout()
     {
@@ -144,18 +174,30 @@ public function excluirUsuario($id)
     return redirect()->route('admin.produtos')->with('success', 'Produto excluído com sucesso!');
 }
 
-    public function pedidos()
-{
-    $pedidos = Pedido::with('user')->latest()->get();
 
-    return view('admin.pedidos', compact('pedidos'));
+public function pedidos()
+{
+    $pedidos = Pedido::where('status', 'pendente')->orderBy('created_at', 'desc')->get();
+    return view('admin.pedidos.index', compact('pedidos'));
 }
+
+
 
     public function showPedido($id)
 {
-    $pedido = Pedido::with('user')->findOrFail($id);
-    return view('admin.show_pedido', compact('pedido'));
+    $pedido = Pedido::findOrFail($id);
+    return view('admin.pedidos.show_pedido', compact('pedido'));
 }
+
+public function concluirPedido($id)
+{
+    $pedido = Pedido::findOrFail($id);
+    $pedido->status = 'concluido';
+    $pedido->save();
+
+    return redirect()->route('admin.pedidos')->with('success', 'Pedido concluído com sucesso.');
+}
+
 
 public function feedbacks()
 {
@@ -171,5 +213,34 @@ public function destroyFeedback($id)
     return redirect()->route('admin.feedbacks')->with('success', 'Feedback excluído com sucesso.');
 }
 
+public function promocoes()
+{
+    $promocoes = Promocao::with('produto')->get();
+    $produtos = Produto::all();
+
+    return view('admin.promocoes.index', compact('promocoes', 'produtos'));
+}
+
+public function storePromocao(Request $request)
+{
+    $request->validate([
+        'produto_id' => 'required|exists:produtos,id',
+        'preco_promocional' => 'required|numeric|min:0',
+    ]);
+
+    Promocao::updateOrCreate(
+        ['produto_id' => $request->produto_id],
+        ['preco_promocional' => $request->preco_promocional]
+    );
+
+    return redirect()->route('admin.promocoes')->with('success', 'Promoção adicionada/atualizada com sucesso!');
+}
+
+public function destroyPromocao($id)
+{
+    Promocao::destroy($id);
+
+    return redirect()->route('admin.promocoes')->with('success', 'Promoção removida com sucesso.');
+}
 }
 

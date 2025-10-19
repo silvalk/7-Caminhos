@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Admin\AdminPromocaoController;
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/order', [CartController::class, 'placeOrder'])->name('cart.order');
@@ -33,8 +34,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
         Route::delete('/usuarios/{id}', [AdminController::class, 'excluirUsuario'])->name('admin.usuarios.excluir');
 
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');  
 
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/produtos', [AdminController::class, 'produtos'])->name('admin.produtos');
         Route::get('/produtos/create', [AdminController::class, 'createProduto'])->name('admin.produtos.create');
         Route::post('/produtos', [AdminController::class, 'storeProduto'])->name('admin.produtos.store');
@@ -44,9 +45,17 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/pedidos', [AdminController::class, 'pedidos'])->name('admin.pedidos');
         Route::get('/pedidos/{id}', [AdminController::class, 'showPedido'])->name('admin.pedidos.show');
+        Route::post('/pedidos/{id}/concluir', [AdminController::class, 'concluirPedido'])->name('admin.pedidos.concluir');
 
         Route::get('/feedbacks', [AdminController::class, 'feedbacks'])->name('admin.feedbacks');
         Route::delete('/feedbacks/{id}', [AdminController::class, 'destroyFeedback'])->name('admin.feedbacks.destroy');
         Route::get('/relatorios', fn() => view('admin.relatorios'))->name('admin.relatorios');
+
+        Route::get('/promocoes', [AdminPromocaoController::class, 'index'])->name('admin.promocoes.index');
+        Route::get('/promocoes/create', [AdminPromocaoController::class, 'create'])->name('admin.promocoes.create');
+        Route::post('/promocoes', [AdminPromocaoController::class, 'store'])->name('admin.promocoes.store');
+        Route::get('/promocoes/{id}/edit', [AdminPromocaoController::class, 'edit'])->name('admin.promocoes.edit');
+        Route::put('/promocoes/{id}', [AdminPromocaoController::class, 'update'])->name('admin.promocoes.update');
+        Route::delete('/promocoes/{id}', [AdminPromocaoController::class, 'destroy'])->name('admin.promocoes.destroy');
     });
 });

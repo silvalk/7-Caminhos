@@ -36,5 +36,11 @@
     @endforeach
   </tbody>
 </table>
-@endsection
 
+{{-- Seção para promoções --}}
+<div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #ccc;">
+  <h3>Promoções</h3>
+  <a href="{{ route('admin.promocoes.index') }}" class="btn">Ver Promoções</a>
+</div>
+
+@endsection
