@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .footer {
     background-color: #6D0202;
     color: #E5AA4F;
@@ -77,20 +81,35 @@ h2 {
 
 
 @media (max-width: 768px) {
-    .footer-content {
-        max-width: 100%;
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0;
-        text-align: center;
-    }
+  .footer-content {
+    max-width: 100%;
+    grid-template-columns: 1fr; 
+    gap: 30px;             
+    padding: 20px 15px; 
+    text-align: center;
+    justify-items: center;
+  }
 
-    .footer-content > div {
-        background-color: transparent;
-        padding: 12px 0;
-    }
+  .footer-content > div {
+    background-color: transparent;
+    padding: 15px 10px;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-content > div h1 {
+    margin-bottom: 12px;
+  }
 
-    .social {
-        justify-content: center;
-    }
+  .footer-content > div h2 {
+    margin-bottom: 10px;
+  }
+
+  .social {
+    justify-content: center;
+    margin-top: 15px;
+  }
 }
