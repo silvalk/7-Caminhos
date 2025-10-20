@@ -25,6 +25,17 @@ class AdminController extends Controller
     return view('admin.usuarios', compact('usuarios')); 
 }
 
+public function relatorios()
+{
+    $totalVendas = \App\Models\Pedido::sum('total');
+    $maisVendido = 'Cristal Azul';
+
+    return view('admin.relatorios', [
+        'totalVendas' => $totalVendas,
+        'produtoMaisVendido' => $maisVendido,
+    ]);
+}
+
 
 public function excluirUsuario($id)
 {

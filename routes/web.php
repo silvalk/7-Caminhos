@@ -77,7 +77,7 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/feedbacks', [AdminController::class, 'feedbacks'])->name('admin.feedbacks');
         Route::delete('/feedbacks/{id}', [AdminController::class, 'destroyFeedback'])->name('admin.feedbacks.destroy');
-        Route::get('/relatorios', fn() => view('admin.relatorios'))->name('admin.relatorios');
+        Route::get('/relatorios', [AdminController::class, 'relatorios'])->name('admin.relatorios');
 
         Route::get('/promocoes', [AdminPromocaoController::class, 'index'])->name('admin.promocoes.index');
         Route::get('/promocoes/create', [AdminPromocaoController::class, 'create'])->name('admin.promocoes.create');
