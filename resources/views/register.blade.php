@@ -25,6 +25,10 @@
 
     <form action="{{ route('register') }}" method="POST">
       @csrf
+       <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="name" id="name" name="name" placeholder="Digite seu nome" required>
+      </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Digite seu email" required>

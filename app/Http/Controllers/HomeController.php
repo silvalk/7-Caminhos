@@ -24,7 +24,7 @@ class HomeController extends Controller
     $categorias = $request->input('categorias', []);
     $preco = $request->input('preco');
 
-    $query = \App\Models\Produto::with('promocao');  // carregando promoções junto
+    $query = \App\Models\Produto::with('promocao'); 
 
     if (!empty($categorias)) {
         $query->whereIn('categoria', $categorias);
@@ -51,6 +51,7 @@ class HomeController extends Controller
                 'preco_promocional' => $promocao ? $promocao->preco_promocional : null,
                 'descricao' => $produto->descricao,
                 'imagem' => $produto->imagem ? '/storage/'.$produto->imagem : '/storage/default.jpg',
+                'categoria' => $produto->categoria,
             ];
         })->values()->toArray();
 

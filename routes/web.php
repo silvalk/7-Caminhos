@@ -7,10 +7,38 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\AdminPromocaoController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Produto;
+use Illuminate\Http\Request;
+
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-Route::post('/cart/order', [CartController::class, 'placeOrder'])->name('cart.order');
+Route::post('/cart/order', [CartController::class, 'placeOrder'])->middleware('auth')->name('cart.order');
 Route::view('/cart', 'cart')->name('cart');
+Route::post('/cart/validate-products', function (Request $request) {
+    $ids = $request->input('ids', []);
+
+    if (!is_array($ids) || empty($ids)) {
+        return response()->json([], 200);
+    }
+
+    $produtos = Produto::whereIn('id', $ids)->get();
+
+    $produtos = $produtos->map(function ($produto) {
+        return [
+            'id' => $produto->id,
+            'nome' => $produto->nome,
+            'preco' => $produto->preco,
+            'imagem' => $produto->imagem ? '/storage/' . $produto->imagem : '/storage/default.jpg',
+            'descricao' => $produto->descricao,
+            'categoria' => $produto->categoria,
+        ];
+    });
+
+    return response()->json($produtos);
+});
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

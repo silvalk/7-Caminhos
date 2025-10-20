@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Produto;
 
 class CartController extends Controller
 {
@@ -32,5 +33,28 @@ class CartController extends Controller
 
         return response()->json(['success' => true, 'pedido_id' => $pedido->id]);
     }
+    public function validateProducts(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return response()->json([]);
+        }
+
+        $produtos = Produto::whereIn('id', $ids)->get();
+
+        $produtos = $produtos->map(function ($produto) {
+            return [
+                'id' => $produto->id,
+                'nome' => $produto->nome,
+                'preco' => $produto->preco,
+                'imagem' => $produto->imagem ? Storage::url($produto->imagem) : '/storage/default.jpg',
+                'descricao' => $produto->descricao,
+                'categoria' => $produto->categoria,
+            ];
+        });
+
+        return response()->json($produtos);
+    }
 }
+
 

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Carrinho - Sete Caminhos</title>
   <style>
     body {
@@ -12,16 +13,18 @@
       background: #ffe9c8;
       color: #222;
     }
+
     #overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      display: none; /* só mostra quando carrinho estiver aberto */
+      background-color: #ffe9c8;
+      display: none;
       z-index: 100;
     }
+
     #cart-wrapper {
       position: fixed;
       top: 50%;
@@ -34,21 +37,33 @@
       padding: 20px;
       z-index: 200;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      overflow-y: auto;
-      max-height: 90%;
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
     }
+
     h2 {
       color: #6D0202;
       margin-bottom: 20px;
       font-size: 24px;
       text-align: center;
     }
+
+    /* Parte que rola: os produtos */
+    #cart-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      padding-right: 10px;
+    }
+
     .cart-item {
       display: flex;
       align-items: center;
       border-bottom: 1px solid #ddd;
       padding: 15px 0;
     }
+
     .cart-item img {
       width: 90px;
       height: 90px;
@@ -57,20 +72,24 @@
       margin-right: 15px;
       border: 1px solid #ccc;
     }
+
     .cart-item-details {
       flex: 1;
     }
+
     .cart-item-details strong {
       font-size: 18px;
       margin-bottom: 5px;
       display: block;
     }
+
     .quantity-controls {
       display: flex;
       align-items: center;
       gap: 10px;
       margin: 8px 0;
     }
+
     .quantity-controls button {
       background-color: #6D0202;
       color: white;
@@ -82,12 +101,14 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     .quantity-controls span {
       font-weight: 600;
       font-size: 16px;
       width: 25px;
       text-align: center;
     }
+
     .price, .subtotal {
       font-weight: 600;
       font-size: 16px;
@@ -96,6 +117,7 @@
       text-align: right;
       color: #6D0202;
     }
+
     .remove-btn {
       background: none;
       border: none;
@@ -105,15 +127,21 @@
       margin-left: 15px;
       font-weight: bold;
     }
+
+    /* Rodapé fixo (Total + botão) */
+    .cart-footer {
+      border-top: 2px solid #6D0202;
+      padding-top: 15px;
+      background: #fff;
+    }
+
     #cart-total {
       text-align: right;
       font-size: 22px;
       font-weight: 700;
       color: #6D0202;
-      margin-top: 25px;
-      border-top: 2px solid #6D0202;
-      padding-top: 15px;
     }
+
     #finalizarCompra {
       background-color: #6D0202;
       color: white;
@@ -122,17 +150,19 @@
       font-size: 18px;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 25px;
+      margin-top: 15px;
       float: right;
     }
+
     a.continuar {
       display: inline-block;
-      margin-top: 25px;
+      margin-top: 15px;
       color: #6D0202;
       font-weight: 600;
       text-decoration: none;
       font-size: 16px;
     }
+
     .close-btn-cart {
       position: absolute;
       top: 10px;
@@ -143,6 +173,37 @@
       color: #333;
       cursor: pointer;
     }
+
+    /* Responsivo */
+    @media (max-width: 480px) {
+      #cart-wrapper {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .price, .subtotal {
+        margin-left: 0;
+        text-align: left;
+        font-size: 14px;
+      }
+
+      #finalizarCompra {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      a.continuar {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -152,103 +213,165 @@
   <div id="cart-wrapper">
     <button class="close-btn-cart" onclick="closeCart()">×</button>
     <h2>Meu Carrinho</h2>
+
     <div id="cart-container">
-      <!-- produtos aparecem aqui -->
     </div>
-    <div id="cart-total">Total: R$ 0,00</div>
+
+    <div class="cart-footer">
+      <div id="cart-total">Total: R$ 0,00</div>
+@if (Auth::check())
     <button id="finalizarCompra">Finalizar Compra</button>
-    <a href="{{ route('products') }}" class="continuar">← Continuar comprando</a>
+@else
+    <p>Você precisa estar <a href="{{ route('login') }}">logado</a> para finalizar a compra.</p>
+@endif
+
+      <a href="{{ route('products') }}" class="continuar">← Continuar comprando</a>
+    </div>
   </div>
 
   <script>
-    function getCart() {
-      const cartStr = localStorage.getItem('cart');
-      return cartStr ? JSON.parse(cartStr) : [];
-    }
 
-    function saveCart(cart) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
+function getCart() {
+  const cartStr = localStorage.getItem('cart');
+  return cartStr ? JSON.parse(cartStr) : [];
+}
 
-    function formatPrice(value) {
-      return value.toFixed(2).replace('.', ',');
-    }
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
-    function openCart() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('cart-wrapper').style.display = 'block';
-      renderCart();
-    }
-
-    function closeCart() {
-    window.location.href = "/products";
-    }
+function formatPrice(value) {
+  const number = Number(value);
+  if (isNaN(number)) {
+    return '0,00';
+  }
+  return number.toFixed(2).replace('.', ',');
+}
 
 
+async function validateCartProducts(cart) {
+  if (!cart.length) return [];
 
-    function renderCart() {
-      const cart = getCart();
-      const container = document.getElementById('cart-container');
-      const totalDiv = document.getElementById('cart-total');
-      container.innerHTML = '';
+  const ids = cart.map(item => item.id);
 
-      if (cart.length === 0) {
-        container.innerHTML = '<p>Seu carrinho está vazio.</p>';
-        totalDiv.textContent = 'Total: R$ 0,00';
-        return;
-      }
-
-      let total = 0;
-
-      cart.forEach((item, idx) => {
-        const subtotal = item.preco * item.quantidade;
-        total += subtotal;
-
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'cart-item';
-
-        itemDiv.innerHTML = `
-          <img src="${item.imagem}" alt="${item.nome}">
-          <div class="cart-item-details">
-            <strong>${item.nome}</strong>
-            <div class="quantity-controls">
-              <button onclick="changeQuantity(${idx}, -1)">−</button>
-              <span>${item.quantidade}</span>
-              <button onclick="changeQuantity(${idx}, 1)">+</button>
-            </div>
-          </div>
-          <div class="price">R$ ${formatPrice(item.preco)}</div>
-          <div class="subtotal">R$ ${formatPrice(subtotal)}</div>
-          <button class="remove-btn" onclick="removeItem(${idx})" title="Remover produto">&times;</button>
-        `;
-
-        container.appendChild(itemDiv);
-      });
-
-      totalDiv.textContent = `Total: R$ ${formatPrice(total)}`;
-    }
-
-    function changeQuantity(index, delta) {
-      const cart = getCart();
-      cart[index].quantidade += delta;
-      if (cart[index].quantidade < 1) {
-        cart.splice(index, 1);
-      }
-      saveCart(cart);
-      renderCart();
-    }
-
-    function removeItem(index) {
-      const cart = getCart();
-      cart.splice(index, 1);
-      saveCart(cart);
-      renderCart();
-    }
-
-    document.getElementById('finalizarCompra').addEventListener('click', () => {
-      alert('Finalizar compra ainda não implementado.');
+  try {
+    const response = await fetch('/cart/validate-products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ ids })
     });
-    openCart();
+
+    if (!response.ok) throw new Error('Erro na validação do carrinho');
+
+    const validProducts = await response.json();
+
+    const quantityMap = {};
+    cart.forEach(item => {
+      quantityMap[item.id] = item.quantidade || 1;
+    });
+
+    return validProducts.map(prod => ({
+      ...prod,
+      quantidade: quantityMap[prod.id] || 1
+    }));
+
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+function openCart() {
+  document.getElementById('overlay').style.display = 'block';
+  document.getElementById('cart-wrapper').style.display = 'flex';
+  renderCart();
+}
+
+function closeCart() {
+  window.location.href = "/products";
+}
+
+async function renderCart() {
+  const cart = getCart();
+
+  const validProducts = await validateCartProducts(cart);
+
+  saveCart(validProducts);
+
+  const container = document.getElementById('cart-container');
+  const totalDiv = document.getElementById('cart-total');
+  container.innerHTML = '';
+
+  if (validProducts.length === 0) {
+    container.innerHTML = '<p>Seu carrinho está vazio.</p>';
+    totalDiv.textContent = 'Total: R$ 0,00';
+    return;
+  }
+
+  let total = 0;
+
+  validProducts.forEach((item, idx) => {
+    const subtotal = item.preco * item.quantidade;
+    total += subtotal;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+
+    itemDiv.innerHTML = `
+    <img src="${item.imagem}" alt="${item.nome}">
+
+      <div class="cart-item-details">
+        <strong>${item.nome}</strong>
+        <div class="quantity-controls">
+          <button onclick="changeQuantity(${idx}, -1)">−</button>
+          <span>${item.quantidade}</span>
+          <button onclick="changeQuantity(${idx}, 1)">+</button>
+        </div>
+      </div>
+      <div class="price">R$ ${formatPrice(item.preco)}</div>
+      <div class="subtotal">R$ ${formatPrice(subtotal)}</div>
+      <button class="remove-btn" onclick="removeItem(${idx})" title="Remover produto">&times;</button>
+    `;
+
+    container.appendChild(itemDiv);
+  });
+
+  totalDiv.textContent = `Total: R$ ${formatPrice(total)}`;
+}
+
+function changeQuantity(index, delta) {
+  const cart = getCart();
+  if (!cart[index]) return;
+
+  cart[index].quantidade += delta;
+  if (cart[index].quantidade < 1) {
+    cart.splice(index, 1);
+  }
+  saveCart(cart);
+  renderCart();
+}
+
+function removeItem(index) {
+  const cart = getCart();
+  if (!cart[index]) return;
+
+  cart.splice(index, 1);
+  saveCart(cart);
+  renderCart();
+}
+
+const finalizarBtn = document.getElementById('finalizarCompra');
+if (finalizarBtn) {
+  finalizarBtn.addEventListener('click', () => {
+    alert('Finalizar compra ainda não implementado.');
+  });
+}
+
+openCart();
+
   </script>
 
 </body>

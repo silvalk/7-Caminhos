@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 <body>
@@ -100,15 +101,33 @@
 </div>
 
 <div class="modal" id="productModal">
-  <div class="modal-content">
+  <div class="modal-content product-modal-layout">
     <button class="close-btn">&times;</button>
-    <img id="modalImg" src="" alt="Produto">
-    <h2 id="modalTitle"></h2>
-    <p id="modalPrice"></p>
-    <p id="modalDesc"></p>
-    <button class="add-cart-btn" id="addToCartBtn">Adicionar ao Carrinho</button>
+
+    <div class="modal-image">
+      <img id="modalImg" src="" alt="Produto">
+    </div>
+
+    <div class="modal-details">
+      <h2 id="modalTitle">Nome do produto</h2>
+      <p id="modalPrice" class="product-price">R$ 0,00</p>
+      <p id="modalDesc">Descrição do produto</p>
+
+    <div class="quantity-container">
+      <button class="quantity-btn minus">−</button>
+      <input type="number" id="quantityInput" value="1" min="1">
+      <button class="quantity-btn plus">+</button>
+  </div>
+
+
+      <p class="product-type">Tipo do Produto: <span id="modalCategory"></span></p>
+
+
+      <button class="add-cart-btn" id="addToCartBtn">Adicionar ao Carrinho</button>
+    </div>
   </div>
 </div>
+
 <div id="customAlert" class="custom-alert"></div>
 @include('partials.footer')
 
