@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
@@ -52,6 +53,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user', [UserController::class, 'show'])->name('user.profile');
+    Route::put('/user', [UserController::class, 'updateName'])->name('user.updateName');
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminController::class, 'login'])->name('admin.login');

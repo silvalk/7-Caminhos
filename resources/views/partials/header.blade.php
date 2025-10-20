@@ -32,7 +32,9 @@
           padding:2px 6px; 
           font-size:12px;" data-count="0">0</span>
       </div>
+      <a href="{{ route('user.profile') }}" aria-label="Perfil do Usuário" title="Perfil do Usuário" style="color: #CB9441;">
       <ion-icon name="person-outline"></ion-icon>
+      </a>
       <ion-icon name="menu-outline" style="cursor:pointer;"></ion-icon>
     </div>
   </div>
