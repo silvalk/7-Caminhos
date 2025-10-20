@@ -1,0 +1,138 @@
+/* menu-lateral.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f4dcb1;
+  overflow-x: hidden;
+  transition: filter 0.3s ease;
+}
+
+.setecam-page-content {
+  padding: 20px;
+  transition: filter 0.3s ease;
+}
+
+.setecam-page-content.blur {
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Menu lateral à direita */
+.setecam-sidebar {
+  width: 280px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: -300px;
+  backdrop-filter: blur(8px);
+  background-color: rgba(245, 225, 180, 0.95);
+  border-left: 1px solid rgba(123,23,23,0.3);
+  border-radius: 20px 0 0 20px;
+  padding: 40px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.15);
+  transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 9999;
+}
+
+.setecam-sidebar.open {
+  right: 0;
+}
+
+.setecam-close-btn {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  color: #7b1717;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s, transform 0.3s;
+  z-index: 10000;
+}
+
+.setecam-close-btn:hover {
+  color: #a02222;
+  transform: rotate(90deg);
+}
+
+.setecam-menu a {
+  text-decoration: none;
+  color: #7b1717;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.setecam-menu a:hover {
+  transform: translateX(-8px);
+  color: #a02222;
+}
+
+.setecam-menu a i {
+  min-width: 20px;
+  text-align: center;
+}
+
+.setecam-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #7b1717;
+  border-radius: 12px;
+  padding: 15px 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.setecam-profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.setecam-profile span {
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.setecam-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.setecam-bottom-actions a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7b1717;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.setecam-bottom-actions a:hover {
+  background-color: rgba(123,23,23,0.1);
+  color: #a02222;
+  transform: translateX(-5px);
+}
