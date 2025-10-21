@@ -220,10 +220,19 @@
     <div class="cart-footer">
       <div id="cart-total">Total: R$ 0,00</div>
 @if (Auth::check())
-    <button id="finalizarCompra">Finalizar Compra</button>
+    <button id="finalizarCompra" class="btn btn-success">Finalizar Compra</button>
+
+    <script>
+        document.getElementById('finalizarCompra').addEventListener('click', function () {
+            window.location.href = "{{ route('finalizar.compra') }}";
+        });
+    </script>
 @else
-    <p>Você precisa estar <a href="{{ route('login') }}">logado</a> para finalizar a compra.</p>
+    <p>
+        Você precisa estar <a href="{{ route('login') }}">logado</a> para finalizar a compra.
+    </p>
 @endif
+
 
       <a href="{{ route('products') }}" class="continuar">← Continuar comprando</a>
     </div>
@@ -366,7 +375,7 @@ function removeItem(index) {
 const finalizarBtn = document.getElementById('finalizarCompra');
 if (finalizarBtn) {
   finalizarBtn.addEventListener('click', () => {
-    alert('Finalizar compra ainda não implementado.');
+    alert('Redirecionando..');
   });
 }
 

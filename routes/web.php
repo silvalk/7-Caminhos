@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CheckoutController;
 
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
@@ -90,5 +91,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/promocoes/{id}/edit', [AdminPromocaoController::class, 'edit'])->name('admin.promocoes.edit');
         Route::put('/promocoes/{id}', [AdminPromocaoController::class, 'update'])->name('admin.promocoes.update');
         Route::delete('/promocoes/{id}', [AdminPromocaoController::class, 'destroy'])->name('admin.promocoes.destroy');
+        Route::get('/finalizar-compra', [CheckoutController::class, 'finalizar'])->name('finalizar.compra');
     });
 });
