@@ -32,37 +32,37 @@
   <div class="lista-categorias">
     <a href="/products?categorias[]=Cristais" class="categoria-item">
       <div class="categoria-imagem">
-        <img src="imagem-exemplo.jpg" alt="Cristais">
+      <img src="{{ asset('storage/categorias/cristais.jpg') }}" alt="Cristais">
       </div>
       <p>Cristais</p>
     </a>
     <a href="/products?categorias[]=Ervas" class="categoria-item">
       <div class="categoria-imagem">
-        <img src="imagem-exemplo.jpg" alt="Ervas">
+      <img src="{{ asset('storage/categorias/ervas.jpg') }}" alt="Ervas">
       </div>
       <p>Ervas</p>
     </a>
     <a href="/products?categorias[]=Miçangas" class="categoria-item">
       <div class="categoria-imagem">
-        <img src="imagem-exemplo.jpg" alt="Miçangas">
+      <img src="{{ asset('storage/categorias/miçangas.jpg') }}" alt="Miçangas">
       </div>
       <p>Miçangas</p>
     </a>
     <a href="/products?categorias[]=Velas" class="categoria-item">
       <div class="categoria-imagem">
-        <img src="imagem-exemplo.jpg" alt="Velas">
+      <img src="{{ asset('storage/categorias/velas.jpg') }}" alt="Velas">
       </div>
       <p>Velas</p>
     </a>
     <a href="/products?categorias[]=Kits" class="categoria-item">
       <div class="categoria-imagem">
-        <img src="imagem-exemplo.jpg" alt="Kits">
+      <img src="{{ asset('storage/categorias/kits.jpg') }}" alt="Kits">
       </div>
       <p>Kits</p>
     </a>
     <a href="/products?categorias[]=Imagens" class="categoria-item">
       <div class="categoria-imagem">
-        <img src="imagem-exemplo.jpg" alt="Imagens">
+      <img src="{{ asset('storage/categorias/imagens.jpg') }}" alt="Imagens">
       </div>
       <p>Imagens</p>
     </a>
