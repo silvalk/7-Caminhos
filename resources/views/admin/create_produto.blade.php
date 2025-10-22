@@ -3,7 +3,6 @@
 @section('titulo', 'Adicionar Produto')
 
 @section('conteudo')
-<h2>Adicionar Produto</h2>
 
 @if ($errors->any())
     <div style="color:red;">
@@ -15,35 +14,51 @@
     </div>
 @endif
 
-<form action="{{ route('admin.produtos.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.produtos.store') }}" method="POST" enctype="multipart/form-data" class="form-grid">
     @csrf
-    <label>Nome:</label><br>
-    <input type="text" name="nome" value="{{ old('nome') }}" required><br><br>
 
-    <label>Preço:</label><br>
-    <input type="number" step="0.01" name="preco" value="{{ old('preco') }}" required><br><br>
+    <div class="form-group">
+        <label>Nome:</label>
+        <input type="text" name="nome" value="{{ old('nome') }}" required>
+    </div>
 
-    <label>Estoque:</label><br>
-    <input type="number" name="estoque" value="{{ old('estoque') }}" required><br><br>
+    <div class="form-group">
+        <label>Preço:</label>
+        <input type="number" step="0.01" name="preco" value="{{ old('preco') }}" required>
+    </div>
 
-    <label>Descrição:</label><br>
-    <textarea name="descricao">{{ old('descricao') }}</textarea><br><br>
+    <div class="form-group">
+        <label>Estoque:</label>
+        <input type="number" name="estoque" value="{{ old('estoque') }}" required>
+    </div>
 
-    <label>Imagem:</label><br>
-    <input type="file" name="imagem"><br><br>
+    <div class="form-group">
+        <label>Categoria:</label>
+        <select name="categoria" required>
+            <option value="">Selecione</option>
+            <option value="Cristais" {{ old('categoria', $produto->categoria ?? '') == 'Cristais' ? 'selected' : '' }}>Cristais</option>
+            <option value="Ervas" {{ old('categoria', $produto->categoria ?? '') == 'Ervas' ? 'selected' : '' }}>Ervas</option>
+            <option value="Miçangas" {{ old('categoria', $produto->categoria ?? '') == 'Miçangas' ? 'selected' : '' }}>Miçangas</option>
+            <option value="Velas" {{ old('categoria', $produto->categoria ?? '') == 'Velas' ? 'selected' : '' }}>Velas</option>
+            <option value="Kits" {{ old('categoria', $produto->categoria ?? '') == 'Kits' ? 'selected' : '' }}>Kits</option>
+            <option value="Imagens" {{ old('categoria', $produto->categoria ?? '') == 'Imagens' ? 'selected' : '' }}>Imagens</option>
+        </select>
+    </div>
 
-    <label for="categoria">Categoria:</label>
-<select name="categoria" id="categoria" required>
-  <option value="">Selecione</option>
-  <option value="Cristais" {{ old('categoria', $produto->categoria ?? '') == 'Cristais' ? 'selected' : '' }}>Cristais</option>
-  <option value="Ervas" {{ old('categoria', $produto->categoria ?? '') == 'Ervas' ? 'selected' : '' }}>Ervas</option>
-  <option value="Miçangas" {{ old('categoria', $produto->categoria ?? '') == 'Miçangas' ? 'selected' : '' }}>Miçangas</option>
-  <option value="Velas" {{ old('categoria', $produto->categoria ?? '') == 'Velas' ? 'selected' : '' }}>Velas</option>
-  <option value="Kits" {{ old('categoria', $produto->categoria ?? '') == 'Kits' ? 'selected' : '' }}>Kits</option>
-  <option value="Imagens" {{ old('categoria', $produto->categoria ?? '') == 'Imagens' ? 'selected' : '' }}>Imagens</option>
-</select>
+    <div class="form-group full-width">
+        <label>Descrição:</label>
+        <textarea name="descricao">{{ old('descricao') }}</textarea>
+    </div>
 
+    <div class="form-group full-width">
+        <label>Imagem:</label>
+        <input type="file" name="imagem">
+    </div>
 
-    <button type="submit">Adicionar Produto</button>
+    <div class="form-group full-width">
+        <button type="submit" class="produto-add">Adicionar Produto</button>
+    </div>
 </form>
+
+
 @endsection

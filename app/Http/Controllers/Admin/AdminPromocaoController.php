@@ -23,11 +23,18 @@ class AdminPromocaoController extends Controller
 
     public function store(Request $request)
 {
-
     $request->validate([
         'produto_id' => 'required|exists:produtos,id',
         'preco_promocional' => 'required|numeric|min:0',
     ]);
+
+    $existePromocao = Promocao::where('produto_id', $request->produto_id)->exists();
+
+    if ($existePromocao) {
+        return redirect()->back()
+            ->withErrors(['produto_id' => 'Já existe uma promoção para este produto.'])
+            ->withInput();
+    }
 
     Promocao::create([
         'produto_id' => $request->produto_id,
@@ -36,6 +43,7 @@ class AdminPromocaoController extends Controller
 
     return redirect()->route('admin.promocoes.index')->with('success', 'Promoção criada com sucesso!');
 }
+
 
 
     public function edit($id)
@@ -51,7 +59,7 @@ class AdminPromocaoController extends Controller
         $request->validate([
             'produto_id' => 'required|exists:produtos,id',
             'preco_promocional' => 'required|numeric|min:0',
-            'ativo' => 'required|boolean',
+            // 'ativo' => 'required|boolean',
         ]);
 
         $promocao = Promocao::findOrFail($id);
