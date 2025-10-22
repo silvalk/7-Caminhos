@@ -21,7 +21,7 @@
     </div>
     <div class="icons">
       <div class="cart-icon" style="position:relative; cursor:pointer;">
-        <ion-icon name="cart-outline" style="font-size:24px; color:#8b0000;"></ion-icon>
+        <ion-icon name="cart-outline" style="font-size:24px; color: #CB9441;"></ion-icon>
         <span style="
           position:absolute; 
           top:-5px; 
