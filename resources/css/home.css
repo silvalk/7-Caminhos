@@ -270,8 +270,8 @@ textarea {
   .lista-categorias {
     display: flex;
     justify-content: center;
-    gap: 40px; /* espaço entre os itens */
-    flex-wrap: wrap; /* para quebrar linha em telas menores */
+    gap: 40px;
+    flex-wrap: wrap;
   }
   
   .categoria-item {
