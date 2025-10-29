@@ -26,7 +26,7 @@ function openModal(produto) {
     modalPrice.textContent = 'R$ ' + Number(produto.preco).toFixed(2).replace('.', ',');
   }
 
-  modalDesc.textContent = produto.descricao || '';
+  modalDesc.innerHTML = produto.descricao.replace(/\n/g, '<br>') || '';
   
   modalCategory.textContent = produto.categoria || '—';
 
@@ -111,7 +111,7 @@ minusBtn?.addEventListener('click', () => {
   }
 
   saveCart(cart);
-  showCustomAlert(`"${currentProduct.nome}" (${quantidadeSelecionada}) adicionado(s) ao carrinho!`);
+  showCustomAlert(` (${quantidadeSelecionada}) "${currentProduct.nome}" adicionado(s) ao carrinho!`);
   closeModal();
   updateCartIcon();
 });

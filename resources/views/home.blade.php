@@ -144,7 +144,7 @@ function moveToSlide(index) {
 setInterval(() => {
     currentIndex = (currentIndex + 1) % carouselDots.length;
     moveToSlide(currentIndex);
-}, 5000);
+}, 8000);
 
 document.addEventListener('DOMContentLoaded', function() {
   const openBtn = document.getElementById('openReviewModal');
