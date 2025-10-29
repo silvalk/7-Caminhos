@@ -252,7 +252,7 @@ Produto::create([
     • Altura: 15 cm
     • Cor: Azul clara
     • Indicações de uso: Orações e rituais de paz',
-    'imagem' => 'produtos/azulclara.jpg',
+    'imagem' => 'produtos/azulclaro.jpg',
     'categoria' => 'Velas',
 ]);
 
