@@ -109,7 +109,7 @@ class ProdutoSeeder extends Seeder
             • Cor: Roxo translúcido
             • Tamanho: 3 a 4 cm
             • Indicações de uso: Meditação, proteção e equilíbrio emocional',
-            'imagem' => 'produtos/exemplo.jpg',
+            'imagem' => 'produtos/ametista.jpg',
             'categoria' => 'Cristais',
         ]);
 
@@ -124,66 +124,66 @@ class ProdutoSeeder extends Seeder
             • Cor: Rosa-claro
             • Tamanho: 5 cm
             • Indicações de uso: Alinhamento emocional, amor próprio e harmonia espiritual',
-            'imagem' => 'produtos/exemplo.jpg',
+            'imagem' => 'produtos/quartzo.jpg',
             'categoria' => 'Cristais',
         ]);
 
-Produto::create([
-    'nome' => 'Cristal de Citrino Natural',
-    'preco' => 29.90,
-    'estoque' => 12,
-    'descricao' => 'O Citrino é o cristal da prosperidade e alegria. Estimula a criatividade, clareza mental e abundância financeira.
+        Produto::create([
+            'nome' => 'Cristal de Citrino Natural',
+            'preco' => 29.90,
+            'estoque' => 12,
+            'descricao' => 'O Citrino é o cristal da prosperidade e alegria. Estimula a criatividade, clareza mental e abundância financeira.
 
-    Características:
-    • Tipo: Natural
-    • Cor: Amarelo dourado
-    • Tamanho: 4 cm
-    • Indicações de uso: Prosperidade e equilíbrio energético',
-    'imagem' => 'produtos/exemplo.jpg',
-    'categoria' => 'Cristais',
-]);
+            Características:
+            • Tipo: Natural
+            • Cor: Amarelo dourado
+            • Tamanho: 4 cm
+            • Indicações de uso: Prosperidade e equilíbrio energético',
+            'imagem' => 'produtos/citrino.jpg',
+            'categoria' => 'Cristais',
+        ]);
 
-Produto::create([
-    'nome' => 'Erva de Arruda Desidratada',
-    'preco' => 14.00,
-    'estoque' => 15,
-    'descricao' => 'A Arruda é conhecida por seu poder de proteção espiritual e limpeza energética. Muito usada em banhos e defumações.
+        Produto::create([
+            'nome' => 'Erva de Arruda Desidratada',
+            'preco' => 14.00,
+            'estoque' => 15,
+            'descricao' => 'A Arruda é conhecida por seu poder de proteção espiritual e limpeza energética. Muito usada em banhos e defumações.
 
-    Características:
-    • Tipo: Erva desidratada
-    • Peso: 50g
-    • Indicações de uso: Banhos, defumações e firmezas de proteção',
-    'imagem' => 'produtos/exemplo.jpg',
-    'categoria' => 'Ervas',
-]);
+            Características:
+            • Tipo: Erva desidratada
+            • Peso: 50g
+            • Indicações de uso: Banhos, defumações e firmezas de proteção',
+            'imagem' => 'produtos/arruda.jpg',
+            'categoria' => 'Ervas',
+        ]);
 
-Produto::create([
-    'nome' => 'Mistura de Ervas para Limpeza Energética',
-    'preco' => 26.90,
-    'estoque' => 8,
-    'descricao' => 'Blend de ervas naturais selecionadas para purificar ambientes e afastar más influências. Ideal para defumações.
+        Produto::create([
+            'nome' => 'Mistura de Ervas para Limpeza Energética',
+            'preco' => 26.90,
+            'estoque' => 8,
+            'descricao' => 'Blend de ervas naturais selecionadas para purificar ambientes e afastar más influências. Ideal para defumações.
+        
+            Características:
+            • Composição: Alecrim, guiné, arruda e alfazema
+            • Peso: 100g
+            • Indicações de uso: Limpeza espiritual e purificação de espaços',
+            'imagem' => 'produtos/energetica.jpg',
+            'categoria' => 'Ervas',
+        ]);
 
-    Características:
-    • Composição: Alecrim, guiné, arruda e alfazema
-    • Peso: 100g
-    • Indicações de uso: Limpeza espiritual e purificação de espaços',
-    'imagem' => 'produtos/exemplo.jpg',
-    'categoria' => 'Ervas',
-]);
-
-Produto::create([
-    'nome' => 'Banho de Ervas Pronto – Equilíbrio',
-    'preco' => 24.90,
-    'estoque' => 9,
-    'descricao' => 'Banho ritualístico preparado com ervas naturais para restaurar a harmonia e o equilíbrio energético.
-
-    Características:
-    • Conteúdo: 250 ml
-    • Composição: Alfazema, manjericão e alecrim
-    • Indicações de uso: Banho energético e meditação',
-    'imagem' => 'produtos/exemplo.jpg',
-    'categoria' => 'Ervas',
-]);
+        Produto::create([
+            'nome' => 'Banho de Ervas Pronto – Equilíbrio',
+            'preco' => 24.90,
+            'estoque' => 9,
+            'descricao' => 'Banho ritualístico preparado com ervas naturais para restaurar a harmonia e o equilíbrio energético.
+        
+            Características:
+            • Conteúdo: 250 ml
+            • Composição: Alfazema, manjericão e alecrim
+            • Indicações de uso: Banho energético e meditação',
+            'imagem' => 'produtos/banho_pronto.jpg',
+            'categoria' => 'Ervas',
+        ]);
 
 Produto::create([
     'nome' => 'Miçangas Pretas e Brancas',
@@ -195,7 +195,7 @@ Produto::create([
     • Material: Vidro
     • Quantidade: 100g
     • Indicações de uso: Artesanato religioso e firmezas espirituais',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/pretobranco.jpg',
     'categoria' => 'Miçangas',
 ]);
 
@@ -209,7 +209,7 @@ Produto::create([
     • Material: Vidro
     • Quantidade: 100g
     • Indicações de uso: Confecção de colares, guias e firmezas espirituais',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/vermelhobranco.jpg',
     'categoria' => 'Miçangas',
 ]);
 
@@ -223,7 +223,7 @@ Produto::create([
     • Material: Vidro
     • Quantidade: 100g
     • Indicações de uso: Guías espirituais e artesanato religioso',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/azulbranco.jpg',
     'categoria' => 'Miçangas',
 ]);
 
@@ -237,7 +237,7 @@ Produto::create([
     • Itens inclusos: 7 velas (branca, azul, vermelha, verde, amarela, roxa e rosa)
     • Altura: 15 cm cada
     • Indicações de uso: Firmezas, orações e rituais espirituais',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/7cores.jpg',
     'categoria' => 'Velas',
 ]);
 
@@ -252,7 +252,7 @@ Produto::create([
     • Altura: 15 cm
     • Cor: Azul clara
     • Indicações de uso: Orações e rituais de paz',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/azulclara.jpg',
     'categoria' => 'Velas',
 ]);
 
@@ -266,7 +266,7 @@ Produto::create([
     • Pedras: Citrino, Pirita, Jade, Aventurina e Quartzo Verde
     • Itens inclusos: 5 cristais e bolsa de algodão
     • Indicações de uso: Prosperidade e alinhamento energético',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/prosperidade.jpg',
     'categoria' => 'Kits',
 ]);
 
@@ -279,7 +279,7 @@ Produto::create([
     Características:
     • Itens inclusos: Ervas secas, sal grosso e essência aromática
     • Indicações de uso: Banhos e rituais de proteção',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/banho.jpg',
     'categoria' => 'Kits',
 ]);
 
@@ -293,7 +293,7 @@ Produto::create([
     • Material: Resina
     • Altura: 22 cm
     • Indicações de uso: Altares, firmezas e oferendas',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/ogum.jpg',
     'categoria' => 'Imagens',
 ]);
 
@@ -307,7 +307,7 @@ Produto::create([
     • Material: Resina com pintura dourada
     • Altura: 20 cm
     • Indicações de uso: Altares e oferendas de amor e prosperidade',
-    'imagem' => 'produtos/exemplo.jpg',
+    'imagem' => 'produtos/oxum.jpg',
     'categoria' => 'Imagens',
 ]);
 
