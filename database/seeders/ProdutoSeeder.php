@@ -97,6 +97,220 @@ class ProdutoSeeder extends Seeder
             'imagem' => 'produtos/proteção.jpg',
             'categoria' => 'Kits',
         ]);
+
+        Produto::create([
+            'nome' => 'Cristal de Ametista Rolado',
+            'preco' => 22.00,
+            'estoque' => 16,
+            'descricao' => 'A Ametista é o cristal da espiritualidade e da proteção energética. Suas vibrações elevadas ajudam a equilibrar emoções, fortalecer a intuição e purificar ambientes espirituais.
+
+            Características:
+            • Tipo: Rolado
+            • Cor: Roxo translúcido
+            • Tamanho: 3 a 4 cm
+            • Indicações de uso: Meditação, proteção e equilíbrio emocional',
+            'imagem' => 'produtos/exemplo.jpg',
+            'categoria' => 'Cristais',
+        ]);
+
+        Produto::create([
+            'nome' => 'Quartzo Rosa Bruto',
+            'preco' => 25.00,
+            'estoque' => 10,
+            'descricao' => 'O Quartzo Rosa é o cristal do amor, da harmonia e da compaixão. Suas energias sutis promovem paz interior, empatia e autoestima.
+
+            Características:
+            • Tipo: Bruto natural
+            • Cor: Rosa-claro
+            • Tamanho: 5 cm
+            • Indicações de uso: Alinhamento emocional, amor próprio e harmonia espiritual',
+            'imagem' => 'produtos/exemplo.jpg',
+            'categoria' => 'Cristais',
+        ]);
+
+Produto::create([
+    'nome' => 'Cristal de Citrino Natural',
+    'preco' => 29.90,
+    'estoque' => 12,
+    'descricao' => 'O Citrino é o cristal da prosperidade e alegria. Estimula a criatividade, clareza mental e abundância financeira.
+
+    Características:
+    • Tipo: Natural
+    • Cor: Amarelo dourado
+    • Tamanho: 4 cm
+    • Indicações de uso: Prosperidade e equilíbrio energético',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Cristais',
+]);
+
+Produto::create([
+    'nome' => 'Erva de Arruda Desidratada',
+    'preco' => 14.00,
+    'estoque' => 15,
+    'descricao' => 'A Arruda é conhecida por seu poder de proteção espiritual e limpeza energética. Muito usada em banhos e defumações.
+
+    Características:
+    • Tipo: Erva desidratada
+    • Peso: 50g
+    • Indicações de uso: Banhos, defumações e firmezas de proteção',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Ervas',
+]);
+
+Produto::create([
+    'nome' => 'Mistura de Ervas para Limpeza Energética',
+    'preco' => 26.90,
+    'estoque' => 8,
+    'descricao' => 'Blend de ervas naturais selecionadas para purificar ambientes e afastar más influências. Ideal para defumações.
+
+    Características:
+    • Composição: Alecrim, guiné, arruda e alfazema
+    • Peso: 100g
+    • Indicações de uso: Limpeza espiritual e purificação de espaços',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Ervas',
+]);
+
+Produto::create([
+    'nome' => 'Banho de Ervas Pronto – Equilíbrio',
+    'preco' => 24.90,
+    'estoque' => 9,
+    'descricao' => 'Banho ritualístico preparado com ervas naturais para restaurar a harmonia e o equilíbrio energético.
+
+    Características:
+    • Conteúdo: 250 ml
+    • Composição: Alfazema, manjericão e alecrim
+    • Indicações de uso: Banho energético e meditação',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Ervas',
+]);
+
+Produto::create([
+    'nome' => 'Miçangas Pretas e Brancas',
+    'preco' => 18.90,
+    'estoque' => 20,
+    'descricao' => 'Miçangas em vidro resistentes e de brilho intenso. Muito usadas para confecção de guias, pulseiras e colares espirituais.
+
+    Características:
+    • Material: Vidro
+    • Quantidade: 100g
+    • Indicações de uso: Artesanato religioso e firmezas espirituais',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Miçangas',
+]);
+
+Produto::create([
+    'nome' => 'Miçangas Vermelhas e Brancas',
+    'preco' => 18.90,
+    'estoque' => 22,
+    'descricao' => 'Miçangas de vidro com brilho intenso nas cores vermelha e branca. Representam vitalidade, equilíbrio e fé.
+
+    Características:
+    • Material: Vidro
+    • Quantidade: 100g
+    • Indicações de uso: Confecção de colares, guias e firmezas espirituais',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Miçangas',
+]);
+
+Produto::create([
+    'nome' => 'Miçangas Azuis e Brancas',
+    'preco' => 18.90,
+    'estoque' => 18,
+    'descricao' => 'Miçangas nas cores azul e branca, ideais para confecção de colares e guias dedicadas a entidades de paz e equilíbrio.
+
+    Características:
+    • Material: Vidro
+    • Quantidade: 100g
+    • Indicações de uso: Guías espirituais e artesanato religioso',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Miçangas',
+]);
+
+Produto::create([
+    'nome' => 'Vela 7 Cores (Kit Completo)',
+    'preco' => 28.90,
+    'estoque' => 7,
+    'descricao' => 'Kit com 7 velas coloridas, representando as linhas espirituais e forças da natureza. Ideal para firmezas e orações semanais.
+
+    Características:
+    • Itens inclusos: 7 velas (branca, azul, vermelha, verde, amarela, roxa e rosa)
+    • Altura: 15 cm cada
+    • Indicações de uso: Firmezas, orações e rituais espirituais',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Velas',
+]);
+
+Produto::create([
+    'nome' => 'Vela Azul Clara – Paz e Serenidade',
+    'preco' => 6.90,
+    'estoque' => 25,
+    'descricao' => 'A Vela Azul simboliza paz e harmonia. Utilizada em orações e firmezas para tranquilizar a mente e o coração.
+
+    Características:
+    • Material: Parafina
+    • Altura: 15 cm
+    • Cor: Azul clara
+    • Indicações de uso: Orações e rituais de paz',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Velas',
+]);
+
+Produto::create([
+    'nome' => 'Kit de Cristais da Prosperidade',
+    'preco' => 69.90,
+    'estoque' => 5,
+    'descricao' => 'Conjunto com 5 pedras energéticas voltadas para atrair prosperidade e equilíbrio financeiro. Ideal para altares e meditação.
+
+    Características:
+    • Pedras: Citrino, Pirita, Jade, Aventurina e Quartzo Verde
+    • Itens inclusos: 5 cristais e bolsa de algodão
+    • Indicações de uso: Prosperidade e alinhamento energético',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Kits',
+]);
+
+Produto::create([
+    'nome' => 'Kit Banho de Ervas – Proteção e Limpeza',
+    'preco' => 59.90,
+    'estoque' => 6,
+    'descricao' => 'Kit ritualístico com ervas, sal grosso e essência natural. Ideal para banhos de limpeza e fortalecimento espiritual.
+
+    Características:
+    • Itens inclusos: Ervas secas, sal grosso e essência aromática
+    • Indicações de uso: Banhos e rituais de proteção',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Kits',
+]);
+
+Produto::create([
+    'nome' => 'Imagem de Ogum em Resina',
+    'preco' => 99.90,
+    'estoque' => 4,
+    'descricao' => 'Imagem de Ogum, Orixá da guerra e da vitória. Produzida em resina de alta qualidade com pintura artesanal detalhada.
+
+    Características:
+    • Material: Resina
+    • Altura: 22 cm
+    • Indicações de uso: Altares, firmezas e oferendas',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Imagens',
+]);
+
+Produto::create([
+    'nome' => 'Imagem de Oxum Dourada',
+    'preco' => 119.90,
+    'estoque' => 3,
+    'descricao' => 'Escultura de Oxum, Orixá das águas doces e da beleza. Representa amor, prosperidade e feminilidade divina.
+
+    Características:
+    • Material: Resina com pintura dourada
+    • Altura: 20 cm
+    • Indicações de uso: Altares e oferendas de amor e prosperidade',
+    'imagem' => 'produtos/exemplo.jpg',
+    'categoria' => 'Imagens',
+]);
+
     }
 
     

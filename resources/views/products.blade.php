@@ -88,15 +88,23 @@
 </div>
 
 <div class="pagination">
-  {{ $produtos->links() }} 
+  @if ($produtos->onFirstPage())
+    <button class="page-btn disabled"><i class="icon ion-chevron-back-outline"></i> Anterior</button>
+  @else
+    <a href="{{ $produtos->previousPageUrl() }}" class="page-btn"><i class="icon ion-chevron-back-outline"></i> Anterior</a>
+  @endif
+
+  @if ($produtos->hasMorePages())
+    <a href="{{ $produtos->nextPageUrl() }}" class="page-btn">Próximo <i class="icon ion-chevron-forward-outline"></i></a>
+  @else
+    <button class="page-btn disabled">Próximo <i class="icon ion-chevron-forward-outline"></i></button>
+  @endif
 </div>
 
 
 
-    <div class="pagination">
-      <button>&laquo; Anterior</button>
-      <button>Próximo &raquo;</button>
-    </div>
+
+    
   </div>
 </div>
 
