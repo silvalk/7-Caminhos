@@ -127,7 +127,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #fdf6ec;
+    background: #ffe9c8;
   }
   
   .login-container form {
@@ -139,7 +139,9 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-  }
+    border: 1px solid #e5aa4f;
+}
+
   
   .login-container h2 {
     text-align: center;
@@ -240,7 +242,6 @@
   }
 }
   
-/* Grid de duas colunas para o formulário */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -253,13 +254,11 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* Grupos de input */
 .form-group {
   display: flex;
   flex-direction: column;
 }
 
-/* Inputs padrão do admin */
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -270,25 +269,21 @@
   background-color: #fff;
 }
 
-/* Campo de textarea */
 .form-group textarea {
   resize: vertical;
   min-height: 100px;
 }
 
-/* Labels */
 .form-group label {
   font-weight: bold;
   margin-bottom: 5px;
   color: #333;
 }
 
-/* Para elementos que ocupam as duas colunas */
 .full-width {
   grid-column: span 2;
 }
 
-/* Botão adicionar produto */
 button.produto-add {
   background-color: #8B0000;
   color: #fff;

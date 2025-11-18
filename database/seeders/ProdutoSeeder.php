@@ -55,21 +55,6 @@ class ProdutoSeeder extends Seeder
         ]);
         
         Produto::create([
-            'nome' => 'Escultura Dama do Fogo',
-            'preco' => 110.90,
-            'estoque' => 2,
-            'descricao' => 'A Escultura da Dama do Fogo em resina representa o poder purificador das chamas e a coragem do renascimento. Com detalhes dourados, laranja e vermelho, transmite intensidade e espiritualidade. A chama translúcida simboliza luz, proteção e energia vital, ideal para altares, meditação e decoração espiritual.
-
-            Características:
-            • Material: Resina
-            • Acabamento: Detalhes vibrantes em dourado, laranja e vermelho
-            • Itens inclusos: 1 escultura
-            • Indicações de uso: Altares, meditação e decoração espiritual',
-            'imagem' => 'produtos/fogo.jpg',
-            'categoria' => 'Imagens',
-        ]);
-        
-        Produto::create([
             'nome' => 'Escultura Iemanjá',
             'preco' => 130.90,
             'estoque' => 2,
