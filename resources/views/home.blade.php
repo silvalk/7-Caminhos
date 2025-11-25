@@ -12,36 +12,14 @@
 </head>
 <body>
 
-@include('partials.header')
+@include('partials.home-header')
 
-<div class="carousel">
-    <div class="carousel-images" id="carouselImages">
-        <img src="https://picsum.photos/id/1018/1000/400" alt="Imagem 1" loading="lazy">
-        <img src="https://picsum.photos/id/1015/1000/400" alt="Imagem 2" loading="lazy">
-        <img src="https://picsum.photos/id/1016/1000/400" alt="Imagem 3" loading="lazy">
-    </div>
-</div>
-<div class="carousel-dots">
-    <span class="dot active" onclick="moveToSlide(0)"></span>
-    <span class="dot" onclick="moveToSlide(1)"></span>
-    <span class="dot" onclick="moveToSlide(2)"></span>
-</div>
+<img class="hero-image" src="{{ Vite::asset('resources/images/hero-image.jpg') }}" alt="Imagem inicial">
 
 <section class="carrossel-categorias">
-  <h2 class="titulo-carrossel">Escolha por categoria</h2>
+  <h2 class="titulo-carrossel">Principais categorias</h2>
   <div class="lista-categorias">
-    <a href="/products?categorias[]=Cristais" class="categoria-item">
-      <div class="categoria-imagem">
-      <img src="{{ asset('storage/categorias/cristais.jpg') }}" alt="Cristais">
-      </div>
-      <p>Cristais</p>
-    </a>
-    <a href="/products?categorias[]=Ervas" class="categoria-item">
-      <div class="categoria-imagem">
-      <img src="{{ asset('storage/categorias/ervas.jpg') }}" alt="Ervas">
-      </div>
-      <p>Ervas</p>
-    </a>
+    
     <a href="/products?categorias[]=Miçangas" class="categoria-item">
       <div class="categoria-imagem">
       <img src="{{ asset('storage/categorias/miçangas.jpg') }}" alt="Miçangas">
@@ -132,20 +110,6 @@
 @include('partials.footer')
 
 <script>
-let currentIndex = 0;
-const imagesContainer = document.getElementById('carouselImages');
-const carouselDots = document.querySelectorAll('.dot');
-function moveToSlide(index) {
-    currentIndex = index;
-    imagesContainer.style.transform = `translateX(-${index * 100}%)`;
-    carouselDots.forEach(dot => dot.classList.remove('active'));
-    carouselDots[index].classList.add('active');
-}
-setInterval(() => {
-    currentIndex = (currentIndex + 1) % carouselDots.length;
-    moveToSlide(currentIndex);
-}, 8000);
-
 document.addEventListener('DOMContentLoaded', function() {
   const openBtn = document.getElementById('openReviewModal');
   const closeBtn = document.getElementById('closeReviewModal');
