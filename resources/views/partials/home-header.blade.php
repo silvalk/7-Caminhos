@@ -6,6 +6,8 @@
     <title>headerhome</title>
     @vite(['resources/js/header.js'])
     @vite(['resources/js/menu-lateral.js'])
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body>
 <div class="header" id="header">
@@ -23,6 +25,7 @@
     <div class="icons">
         <div class="cart-icon" style="position:relative; cursor:pointer;">
             <ion-icon name="cart-outline" style="font-size:30px; color: #CB9441;"></ion-icon>
+            
         </div>
         <a href="{{ route('user.profile') }}" aria-label="Perfil do Usuário" title="Perfil do Usuário" style="color: #CB9441;">
             <ion-icon name="person-outline"></ion-icon>
@@ -32,4 +35,9 @@
 </div>
 </body>
 </html>
+
+<script>
+  window.isLoggedIn = @json(auth()->check());
+  window.nomeUsuario = @json(auth()->user()?->name ?? '');
+</script>
 
