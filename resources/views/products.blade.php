@@ -42,6 +42,10 @@
     <input type="checkbox" name="categorias[]" value="Imagens" {{ (request('categorias') && in_array('Imagens', request('categorias'))) ? 'checked' : '' }}>
     Imagens
   </label>
+  <label>
+    <input type="checkbox" name="categorias[]" value="Roupas" {{ (request('categorias') && in_array('Imagens', request('categorias'))) ? 'checked' : '' }}>
+    Roupas
+  </label>
 
   <h3>Preço</h3>
   <label>

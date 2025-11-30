@@ -39,7 +39,7 @@ import '../css/menu-lateral.css'
       <a href="/products?categorias[]=Cristais"><i class="fas fa-gem"></i> Cristais</a>
       <a href="/products?categorias[]=Miçangas"><i class="fas fa-spa"></i> Miçangas</a>
       <a href="/products?categorias[]=Kits"><i class="fas fa-box"></i> Kits</a>
-      <a href="/products?categorias[]=Roupas"><i class="fas fa-box"></i> Roupas</a>
+      <a href="/products?categorias[]=Roupas"><i class="fas fa-shirt"></i> Roupas</a>
       <a href="/products"><i class="fas fa-shop"></i> Produtos</a>
     </nav>
 

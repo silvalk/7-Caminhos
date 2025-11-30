@@ -6,27 +6,47 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    public function finalizar()
-    {
-        // número do vendedor (coloque o seu número completo, sem +, espaços ou traços)
-        $numero = '5515991440001';
-
-        // Exemplo: obtendo itens do carrinho armazenado na sessão
-        $itens = session('carrinho', []);
-
-        $mensagem = "Olá! Gostaria de finalizar minha compra com os seguintes itens:\n\n";
-        $total = 0;
-
-        foreach ($itens as $item) {
-            $mensagem .= "• {$item['nome']} (x{$item['quantidade']}) - R$" . number_format($item['preco'], 2, ',', '.') . "\n";
-            $total += $item['preco'] * $item['quantidade'];
-        }
-
-        $mensagem .= "\nTotal: R$" . number_format($total, 2, ',', '.') . "\n\n";
-        $mensagem .= "Por favor, confirme o pagamento e o envio 🙏";
-
-        $url = "https://wa.me/{$numero}?text=" . urlencode($mensagem);
-
-        return redirect()->away($url);
+   public function finalizar(Request $request)
+{
+    if (!auth()->check()) {
+        return response()->json(['erro' => 'Usuário não logado'], 401);
     }
+
+    $itens = $request->input('cart', []);
+    if (empty($itens)) {
+        return response()->json(['erro' => 'Carrinho vazio'], 400);
+    }
+
+    $numero = '5515991440001';
+
+    // Mensagem inicial amigável
+    $mensagem = "Olá! 👋\n";
+    $mensagem .= "Espero que você esteja bem!\n";
+    $mensagem .= "Gostaria de finalizar minha compra com os seguintes itens:\n\n";
+
+    $total = 0;
+
+    foreach ($itens as $item) {
+        $subtotal = $item['preco'] * $item['quantidade'];
+        $mensagem .= "• {$item['nome']}\n";
+        $mensagem .= "  Quantidade: {$item['quantidade']}\n";
+        $mensagem .= "  Preço unitário: R$ " . number_format($item['preco'], 2, ',', '.') . "\n";
+        $mensagem .= "  Subtotal: R$ " . number_format($subtotal, 2, ',', '.') . "\n\n";
+        $total += $subtotal;
+    }
+
+    $mensagem .= "💰 Total: R$ " . number_format($total, 2, ',', '.') . "\n\n";
+    $mensagem .= "Por favor, confirme o pagamento e o envio. Muito obrigado! 🙏";
+
+    $mensagem = preg_replace('/[^\x20-\x7EÀ-ÿ\n\p{L}\p{N}\p{P}]/u', '', $mensagem);
+
+    $url = "https://wa.me/{$numero}?text=" . rawurlencode($mensagem);
+
+    return response()->json(['url' => $url]);
+}
+
+
+
+
+
 }

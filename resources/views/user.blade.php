@@ -8,7 +8,7 @@
     <link href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css" rel="stylesheet" />
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    @vite(['resources/js/home.js'])
+    @vite(['resources/js/user.js'])
     <style>
 
         body {
@@ -22,6 +22,7 @@
         }
 
         .container-user {
+            margin-top: 60px;
             max-width: 500px;
             width: 90%;
             background: #fff;
@@ -85,7 +86,7 @@
     </style>
 </head>
 <body>
-    @include('partials.header')
+    @include('partials.home-header')
 
     <main class="container-user" role="main" aria-label="Perfil do usuário">
         @if(session('success'))

@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckoutController;
 
+Route::middleware(['auth'])->group(function() {
+    Route::post('/admin/finalizar-compra', [CheckoutController::class, 'finalizar'])->name('finalizar.compra');
+});
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/order', [CartController::class, 'placeOrder'])->middleware('auth')->name('cart.order');
