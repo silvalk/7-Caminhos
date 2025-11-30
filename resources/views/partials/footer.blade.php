@@ -14,7 +14,7 @@
     </div>
 
     <div class="email">
-      <h1>Nosso Email:</h1>
+      <h1>Email:</h1>
       <h2>loja7caminhos@gmail.com</h2>
     </div>
 

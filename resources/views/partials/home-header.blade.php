@@ -24,9 +24,10 @@
     </div>
     <div class="icons">
         <div class="cart-icon" style="position:relative; cursor:pointer;">
-            <ion-icon name="cart-outline" style="font-size:30px; color: #CB9441;"></ion-icon>
-            
-        </div>
+  <ion-icon name="cart-outline" style="font-size:30px; color: #CB9441;"></ion-icon>
+  <span class="cart-count" data-count style="display:none;"></span>
+</div>
+
         <a href="{{ route('user.profile') }}" aria-label="Perfil do Usuário" title="Perfil do Usuário" style="color: #CB9441;">
             <ion-icon name="person-outline"></ion-icon>
         </a>

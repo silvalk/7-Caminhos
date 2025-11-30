@@ -84,14 +84,15 @@ minusBtn?.addEventListener('click', () => {
   }
 
   function updateCartIcon() {
-    const cart = getCart();
-    const totalItems = cart.reduce((acc, p) => acc + p.quantidade, 0);
-    const cartIcon = document.querySelector('.cart-icon span[data-count]');
-    if (cartIcon) {
-      cartIcon.textContent = totalItems;
-      cartIcon.style.display = totalItems > 0 ? 'inline-block' : 'none';
-    }
+  const cart = getCart();
+  const totalItems = cart.reduce((acc, p) => acc + p.quantidade, 0);
+  const cartCountSpan = document.querySelector('.cart-icon span[data-count]');
+  if (cartCountSpan) {
+    cartCountSpan.textContent = totalItems;
+    cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
   }
+}
+
 
   addToCartBtn?.addEventListener('click', () => {
   const input = document.getElementById('quantityInput');

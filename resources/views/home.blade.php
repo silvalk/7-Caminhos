@@ -107,6 +107,28 @@
   </div>
 </div>
 
+<section class="sobre-home-mid">
+    <div class="sobre-mid-container">
+
+        <div class="sobre-mid-texto">
+            <h2>Sobre a 7 Caminhos de Fé</h2>
+
+            <p>A 7 Caminhos de Fé nasceu do amor, do axé e da dedicação da Yalorisá Fernanda de Òsóòsì. Somos um espaço que une acolhimento, tradição e respeito às religiões de matriz africana.</p>
+
+            <p>Nosso propósito é oferecer produtos selecionados com zelo, fundamento e intenção — itens que auxiliam no equilíbrio espiritual e fortalecem a fé de cada cliente. Aqui, cada pessoa é recebida com respeito à sua jornada e ao seu sagrado.</p>
+
+            <p>Guiada pela responsabilidade espiritual e experiência da Yalorisá Fernanda, nossa casa se mantém como um ponto de energia positiva, luz e axé para todos que nos procuram.</p>
+        </div>
+
+        <div class="sobre-mid-foto">
+            <img src="{{ Vite::asset('resources/images/yalorisa.jpg') }}" alt="Yalorisá Fernanda de Òsóòsì">
+            <p class="sobre-mid-legenda">Yalorisá Fernanda de Òsóòsì</p>
+        </div>
+
+    </div>
+</section>
+
+
 @include('partials.footer')
 
 <script>
